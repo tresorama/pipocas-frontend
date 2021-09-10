@@ -92,22 +92,40 @@ window._UI = {};
 
 // build UI ANIMATION -> Header Bar Show/Hide
 (function () {
+  const headerSelector = ".page-header";
   const headerBarSelector = ".page-header__bar";
+  const taxonomyNavigationSelector = ".taxonomy-navigation";
   window._UI.headerBar = {
     isVisible: true,
     show() {
       if (this.isVisible) return;
       this.isVisible = true;
-      gsap.to(headerBarSelector, { top: 0, duration: 0.1 });
+      gsap.to(headerSelector, { top: 0, duration: 0.1 });
     },
     hide() {
       if (!this.isVisible) return;
       this.isVisible = false;
-      gsap.to(headerBarSelector, { top: -this.getHeight(), duration: 0.1 });
+      gsap.to(headerSelector, {
+        top: -this.getHeight(),
+        duration: 0.1,
+      });
     },
     getHeight() {
-      return document.querySelector(headerBarSelector).getBoundingClientRect()
-        .height;
+      const headerBarHeight =
+        document.querySelector(headerBarSelector).getBoundingClientRect()
+          .height || 0;
+      const taxonomyNavigationHeight =
+        document
+          .querySelector(taxonomyNavigationSelector)
+          .getBoundingClientRect().height || 0;
+      return headerBarHeight + taxonomyNavigationHeight;
+    },
+    setHeightCustomProperty() {
+      const height = this.getHeight();
+      document.documentElement.style.setProperty(
+        cssCustomPropName,
+        `${height}px`
+      );
     },
   };
 })();
@@ -130,7 +148,10 @@ new ObserverScroll({
       const headerNavigationIsOpen = () => window._UI.headerNavigation.isOpen;
       const showHeader = () => window._UI.headerBar.show();
       const hideHeader = () => window._UI.headerBar.hide();
-
+      const threshold = () => {
+        return 10; // absolute thresould in px
+        return getHeaderHeight();
+      };
       // logic
       if (headerNavigationIsOpen()) {
         showHeader();
@@ -142,7 +163,7 @@ new ObserverScroll({
         return;
       }
 
-      if (scrollPos <= -getHeaderHeight()) {
+      if (scrollPos <= -threshold()) {
         hideHeader();
         return;
       }
@@ -176,13 +197,28 @@ new ObserverScroll({
     });
 })();
 
+// CSS Custom Prop Value Update -> Header Height
+(function () {
+  const cssCustomPropName = "--live-all-header-stuffs-height";
+  const getHeight = () => window._UI.headerBar.getHeight();
+  const setHeightCustomProperty = () => {
+    const height = getHeight();
+    document.documentElement.style.setProperty(
+      cssCustomPropName,
+      `${height}px`
+    );
+  };
+  setHeightCustomProperty();
+  window.addEventListener("resize", throttle(setHeightCustomProperty, 200));
+})();
+
 /* =================================================== 
       SINGLE PRODUCT PAGE ONLY
 =================================================== */
 // switch between mobile visual and desktop visual if screen width is enough wide
 (function () {
   let breakpoint = 768;
-  breakpoint = 500;
+  //breakpoint = 500;
   const className = "is-large-view";
   const getEl = () => document.querySelector(".page-content .product");
   if (!getEl()) return; // element not present in page

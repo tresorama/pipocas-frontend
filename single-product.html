@@ -25,50 +25,85 @@
     -->
     <div class="page-header">
       <div class="page-header__bar-occupied-space"></div>
+      <nav class="taxonomy-navigation">
+        <ul class="container">
+          <li class="taxonomy-navigation__item btn btn--t-light">Outwear</li>
+          <li class="taxonomy-navigation__item btn btn--t-light">Dresses</li>
+          <li class="taxonomy-navigation__item btn btn--t-light">Tops</li>
+          <li class="taxonomy-navigation__item btn btn--t-light">Bottoms</li>
+          <li class="taxonomy-navigation__item btn btn--t-light">Misc</li>
+          <li class="taxonomy-navigation__item btn btn--t-light">Swimwear</li>
+        </ul>
+      </nav>
       <div class="page-header__nav-bg"></div>
       <div class="page-header__bar">
         <div class="page-header__bar-bg"></div>
         <div class="container">
-          <div class="header-navigation-mobile-trigger">
-            <button
-              class="header-icon button-icon"
-              data-js="header-navigation-mobile-trigger"
-            >
-              <i class="fas fa-bars"></i>
-              <i class="ph-list"></i>
-              <i class="ph-list-light"></i>
-            </button>
+          <div class="header-secondary-navigation left">
+            <ul>
+              <li
+                class="
+                  header-secondary-navigation__item
+                  header-navigation-mobile-trigger
+                "
+              >
+                <button
+                  class="header-icon btn-icon"
+                  data-js="header-navigation-mobile-trigger"
+                >
+                  <i class="fas fa-bars"></i>
+                  <i class="ph-list"></i>
+                  <i class="ph-list-light"></i>
+                </button>
+              </li>
+              <li class="header-secondary-navigation__item search-box-trigger">
+                <button
+                  class="header-icon btn-icon"
+                  data-js="search-box-trigger"
+                >
+                  <i class="fa fa-search"></i>
+                  <i class="ph-magnifying-glass"></i
+                  ><i class="ph-magnifying-glass-light"></i>
+                </button>
+              </li>
+            </ul>
           </div>
           <div class="logo">
             <img
               src="./assets/images/logo/pipocas_logo_crop_2_recolor_10.png"
             />
           </div>
-          <nav class="header-secondary-navigation">
+          <nav class="header-secondary-navigation right">
             <ul>
-              <li class="header-secondary-navigation__item header-icon">
-                <button class="header-icon button-icon">
+              <li class="header-secondary-navigation__item search-box-trigger">
+                <button
+                  class="header-icon btn-icon"
+                  data-js="search-box-trigger"
+                >
                   <i class="fa fa-search"></i>
                   <i class="ph-magnifying-glass"></i
                   ><i class="ph-magnifying-glass-light"></i>
                 </button>
               </li>
-              <li class="header-secondary-navigation__item header-icon">
-                <button class="header-icon button-icon">
+              <li class="header-secondary-navigation__item my-account-trigger">
+                <button
+                  class="header-icon btn-icon"
+                  data-js="my-account-trigger"
+                >
                   <i class="fa fa-user"></i>
                   <i class="ph-user"></i>
                   <i class="ph-user-light"></i>
                 </button>
               </li>
-              <li class="header-secondary-navigation__item header-icon">
-                <button class="header-icon button-icon">
+              <li class="header-secondary-navigation__item wishlist-trigger">
+                <button class="header-icon btn-icon" data-js="wishlist-trigger">
                   <i class="far fa-heart"></i>
                   <i class="ph-heart"></i>
                   <i class="ph-heart-light"></i>
                 </button>
               </li>
-              <li class="header-secondary-navigation__item header-icon">
-                <button class="header-icon button-icon">
+              <li class="header-secondary-navigation__item cart-trigger">
+                <button class="header-icon btn-icon" data-js="cart-trigger">
                   <i class="fas fa-shopping-cart"></i>
                   <i class="ph-shopping-bag"></i>
                   <i class="ph-shopping-bag-light"></i>
@@ -86,6 +121,11 @@
                 <li class="header-navigation__item">Pagina 5</li>
                 <li class="header-navigation__item">Pagina 6</li>
                 <li class="header-navigation__item">Pagina 7</li>
+              </ul>
+              <ul>
+                <li class="header-navigation__item my-account-trigger">
+                  Il mio Account
+                </li>
               </ul>
             </div>
           </nav>
@@ -137,14 +177,18 @@
               </p>
             </div>
             <div class="product__add-to-cart">
-              <button class="button button--primary">
+              <button class="btn btn--s-contained btn--c-primary">
                 Aggiungi Al Carrello
               </button>
             </div>
             <div class="product__add-to-wishlist">
-              <button class="button">Aggiungi Alla Wishlist</button>
+              <button class="btn btn--s-contained">
+                Aggiungi Alla Wishlist
+              </button>
             </div>
-            <div class="product__share">Condividi</div>
+            <div class="product__share">
+              <button class="btn btn--s-text">Condividi</button>
+            </div>
 
             <!-- <div class="product__description">
               <p>

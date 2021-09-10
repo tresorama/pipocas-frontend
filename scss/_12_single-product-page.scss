@@ -1,6 +1,5 @@
-// SI§NGLE PROUCT PAGE
 .product {
-  margin-top: $space-y-0;
+  margin-top: $space-y-sm;
 
   &__images {
     .carousel {
@@ -18,7 +17,7 @@
     }
   }
 
-  .button {
+  .btn {
     display: block;
     width: 100%;
   }
@@ -48,16 +47,19 @@
   }
   &__add-to-cart {
     margin-top: $space-y-lg;
-    @include text-body;
   }
   &__add-to-wishlist {
     margin-top: $space-y-sm;
-    @include text-body;
   }
   &__share {
     margin-top: $space-y-sm;
     text-align: center;
-    @include text-body;
+  }
+}
+
+@media (max-width: 767px) and (min-aspect-ratio: 1 / 1) and (max-aspect-ratio: 2/1) {
+  .product .carousel {
+    --box-width: 20%;
   }
 }
 
@@ -90,6 +92,15 @@
 
   .product__details {
     position: sticky;
-    top: var(--header-height);
+    top: var(--live-all-header-stuffs-height, var(--header-bar-height));
+    top: 10px;
+    // border-top: 1px solid $c-grey;
+
+    > *:first-child {
+      margin-top: var(
+        --live-all-header-stuffs-height,
+        var(--header-bar-height)
+      );
+    }
   }
 }

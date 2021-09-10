@@ -1,4 +1,7 @@
-.button {
+/* =================================================== 
+      BUTTON
+=================================================== */
+.btn {
   @include text-button;
   display: inline-block;
   text-align: center;
@@ -18,34 +21,54 @@
   }
 
   --color-text: #{$c-black};
+  --color-bg: transparent;
   --color-border: #{$c-black};
-  --color-bg: #{$c-white};
-  --color-text-active: #{$c-white};
-  --color-border-active: #{$c-grey-dark};
-  --color-bg-active: #{$c-grey-dark};
-}
-.button--text {
-  border-color: transparent;
+  --color-text-active: #{$c-black};
+  --color-bg-active: #{$c-grey-light};
+  --color-border-active: #{$c-black};
 }
 
-.button--primary {
-  --color-text: #{$c-white};
-  --color-border: #{$c-black};
-  --color-bg: #{$c-black};
-  --color-text-active: #{$c-white};
-  --color-border-active: #{$c-grey-dark};
-  --color-bg-active: #{$c-grey-dark};
+/* =================================================== 
+      BUTTON - SHAPE VARIANTS
+=================================================== */
+.btn--s-outline {
+  //is default
 }
-// .button--primary {
-//   --color-text: #{$c-white};
-//   --color-border: #{$c-black};
-//   --color-bg: #{$c-brand-1};
-//   --color-text-active: #{$c-white};
-//   --color-border-active: #{$c-brand-1};
-//   --color-bg-active: #{$c-brand-2};
-// }
+.btn--s-contained {
+  --color-text: #{$c-black};
+  --color-bg: #{$c-grey-light};
+  --color-border: #{$c-grey-light};
+  --color-text-active: #{$c-white};
+  --color-bg-active: #{$c-grey-dark};
+  --color-border-active: #{$c-grey-dark};
+  &.btn--c-primary {
+    --color-text: #{$c-white};
+    --color-bg: #{$c-black};
+    --color-border: #{$c-black};
+    --color-text-active: #{$c-white};
+    --color-bg-active: #{$c-grey-dark};
+    --color-border-active: #{$c-grey-dark};
+  }
+}
+.btn--s-text {
+  --color-text: #{$c-black};
+  --color-bg: transparent;
+  --color-border: transparent;
+  --color-text-active: #{$c-black};
+  --color-bg-active: #{$c-grey-light};
+  --color-border-active: transparent;
+}
+/* =================================================== 
+      BUTTON - TEXT PROMINENCY VARIANTS
+=================================================== */
+.btn--t-light {
+  @include text-button-light;
+}
 
-.button-icon {
+/* =================================================== 
+      BUTTON ICON
+=================================================== */
+.btn-icon {
   background-color: transparent;
   display: inline-flex;
   justify-content: center;

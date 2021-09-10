@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel ./index.html --open",
-    "build": "parcel build ./index.html --public-url \"https://tresorama.github.io/pipocas-frontend/\"",
-    "predeploy": "npm run build",
+    "start:single-product": "parcel ./single-product.html --open",
+    "build": "parcel build ./index.html",
+    "build:gh-pages": "parcel build ./index.html --public-url \"https://tresorama.github.io/pipocas-frontend/\"",
+    "predeploy": "npm run build:gh-pages",
     "deploy": "gh-pages -d dist"
   },
   "devDependencies": {

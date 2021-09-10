@@ -1,62 +1,64 @@
 :root {
-  --header-height: 7vh;
-}
-
-.page-header__bar,
-.page-content,
-.header-navigation {
-  padding-left: $space-x-md;
-  padding-right: $space-x-md;
+  --header-bar-height: 7vmax;
+  --live-all-header-stuffs-height: "";
 }
 
 .page-content {
-  padding-top: var(--header-height);
+  padding-top: var(--live-all-header-stuffs-height, var(--header-bar-height));
 }
-.page-header__bar-occupied-space {
-  height: var(--header-height);
-  height: $space-y-sm;
-  background-color: white;
+
+.header-icon {
+  padding: 6px;
+  font-size: 1.4rem;
 }
+
 .page-header {
+  z-index: $z-index-header-bar;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   pointer-events: none;
-  z-index: 10;
 
-  .header-icon {
-    padding: 6px;
-    font-size: 1.4rem;
+  > * {
+    pointer-events: all;
   }
+}
+
+.page-header__bar-occupied-space {
+  height: $space-y-sm;
+  background-color: $c-white;
 }
 
 .page-header__nav-bg {
   @include hasParentDimensions;
   position: absolute;
-  z-index: -1;
-  background-color: lightgrey;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  background-color: $c-grey-light;
 }
 
 .page-header__bar-bg {
-  z-index: -1;
+  @include hasParentDimensions;
   position: absolute;
   left: 0;
   top: 0;
-  @include hasParentDimensions;
-  background-color: white;
+  pointer-events: none;
+  background-color: $c-white;
 }
+
 .page-header__bar {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: var(--header-height);
+  height: var(--header-bar-height);
   display: flex;
-  pointer-events: all;
 
-  .container {
+  > [class*="container"] {
+    position: relative;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -70,17 +72,13 @@
   }
 }
 
-// NESTED BLOCKS
-// NESTED BLOCKS
-// NESTED BLOCKS
-// NESTED BLOCKS
-// NESTED BLOCKS
-// NESTED BLOCKS
-// NESTED BLOCKS
+/* =================================================== 
+      HEADER NAVIGATION
+=================================================== */
 .header-navigation {
   overflow: scroll;
   position: fixed;
-  top: var(--header-height);
+  top: var(--header-bar-height);
   left: 0;
   right: 0;
   bottom: 0;
@@ -89,19 +87,87 @@
     margin-top: $space-y-md;
     list-style-type: none;
   }
+  ul + ul {
+    margin-top: $space-y-xl;
+  }
 
   &__item + &__item {
-    margin-top: $space-y-xs;
+    margin-top: $space-y-sm;
   }
   &__item {
     @include text-heading-section;
   }
 }
 
+/* =================================================== 
+      HEADER BAR SECNODARY NAVIGATION
+=================================================== */
 .header-secondary-navigation {
   ul {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     list-style-type: none;
+  }
+  &.left {
+    .header-secondary-navigation__item:first-child {
+      margin-left: -6px;
+    }
+  }
+  &.right {
+    ul {
+      justify-content: flex-end;
+    }
+  }
+}
+
+/* =================================================== 
+      TAXONOMY NAVIGATION BAR
+=================================================== */
+.taxonomy-navigation {
+  position: absolute;
+  top: var(--header-bar-height);
+  left: 0;
+  width: 100%;
+  background-color: $c-white;
+
+  ul {
+    margin-top: $space-y-sm;
+    margin-bottom: $space-y-sm;
+    overflow-x: scroll;
+    display: flex;
+    justify-content: flex-start;
+    list-style-type: none;
+  }
+  &__item + &__item {
+    margin-left: $space-x-sm;
+  }
+  &__item {
+    border-radius: $border-radius;
+    border: 1px solid;
+    padding: 0.2em 1em;
+  }
+}
+
+/* =================================================== 
+      DEVICE BASED OVERRIDES
+=================================================== */
+@media (max-width: 767px) {
+  .header-secondary-navigation.right [data-js="search-box-trigger"] {
+    display: none;
+  }
+  .header-secondary-navigation.right .my-account-trigger {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  :root {
+    --header-bar-height: 7vmin;
+  }
+
+  .header-secondary-navigation.left [data-js="search-box-trigger"] {
+    display: none;
+  }
+  .header-navigation .my-account-trigger {
+    display: none;
   }
 }
