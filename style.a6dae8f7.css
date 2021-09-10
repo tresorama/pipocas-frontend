@@ -1,0 +1,424 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0px solid currentColor; }
+
+img {
+  display: block;
+  max-width: 100%; }
+
+body {
+  font-size: 1rem;
+  line-height: 1.29;
+  font-weight: 300;
+  font-family: "Montserrat"; }
+
+.container {
+  padding-left: 3.2vmin;
+  padding-right: 3.2vmin;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto; }
+
+.container-fw {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto; }
+
+/* =================================================== 
+      BUTTON
+=================================================== */
+.btn {
+  font-size: 1rem;
+  line-height: 1.29;
+  font-weight: 400;
+  font-family: "Montserrat";
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.55em 1.2em;
+  border: 2px solid;
+  border-radius: 2px;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border-color: var(--color-border);
+  --color-text: black;
+  --color-bg: transparent;
+  --color-border: black;
+  --color-text-active: black;
+  --color-bg-active: #eaeaeb;
+  --color-border-active: black; }
+  .btn:hover, .btn:focus {
+    background-color: var(--color-bg-active);
+    color: var(--color-text-active);
+    border-color: var(--color-border-active); }
+
+/* =================================================== 
+      BUTTON - SHAPE VARIANTS
+=================================================== */
+.btn--s-contained {
+  --color-text: black;
+  --color-bg: #eaeaeb;
+  --color-border: #eaeaeb;
+  --color-text-active: white;
+  --color-bg-active: #757575;
+  --color-border-active: #757575; }
+  .btn--s-contained.btn--c-primary {
+    --color-text: white;
+    --color-bg: black;
+    --color-border: black;
+    --color-text-active: white;
+    --color-bg-active: #757575;
+    --color-border-active: #757575; }
+
+.btn--s-text {
+  --color-text: black;
+  --color-bg: transparent;
+  --color-border: transparent;
+  --color-text-active: black;
+  --color-bg-active: #eaeaeb;
+  --color-border-active: transparent; }
+
+/* =================================================== 
+      BUTTON - TEXT PROMINENCY VARIANTS
+=================================================== */
+.btn--t-light {
+  font-size: 1rem;
+  line-height: 1.29;
+  font-weight: 300;
+  font-family: "Montserrat"; }
+
+/* =================================================== 
+      BUTTON ICON
+=================================================== */
+.btn-icon {
+  background-color: transparent;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center; }
+
+/* COMPONENT DEFINITION */
+.carousel {
+  /* INPUTABLE */
+  --padding-top: 3vw;
+  --padding-right: 3vw;
+  --padding-left: 3vw;
+  --padding-bottom: 3vw;
+  --box-width: 26vw;
+  --box-spacer: 3vw;
+  --box-aspect-ratio: 12 / 9;
+  --bg-color: white;
+  --scrollbar-color: lightgrey;
+  --scrollbar-thumb-size: 5px;
+  --border-radius-width: 2px;
+  /* DERIVED -  Do Not Override !! */
+  --box-height: calc(var(--box-width) * var(--box-aspect-ratio));
+  --padding-bottom-base: calc(
+    var(--padding-bottom) - var(--scrollbar-thumb-size)
+  );
+  --padding-bottom-outer: calc(var(--padding-bottom-base) * 0.5);
+  --padding-bottom-inner: calc(var(--padding-bottom-base) * 0.5);
+  /* style */
+  background: var(--bg-color);
+  padding-top: var(--padding-top);
+  padding-right: var(--padding-right);
+  padding-left: var(--padding-left);
+  padding-bottom: var(--padding-bottom-outer);
+  border-radius: var(--border-radius-width); }
+
+.carousel__container {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  padding-bottom: var(--padding-bottom-inner); }
+  .carousel__container::-webkit-scrollbar {
+    height: var(--scrollbar-thumb-size); }
+  .carousel__container::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-color);
+    border-radius: 50px;
+    visibility: hidden;
+    border-radius: var(--border-radius-width); }
+  .carousel__container:hover::-webkit-scrollbar-thumb {
+    visibility: visible; }
+
+.carousel__box + .carousel__box {
+  margin-left: var(--box-spacer); }
+
+.carousel__box {
+  flex-shrink: 0;
+  width: var(--box-width);
+  height: var(--box-height);
+  overflow: hidden;
+  position: relative;
+  border-radius: var(--border-radius-width);
+  scroll-snap-align: start; }
+
+.carousel__box img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; }
+
+.carousel--vertical {
+  cursor: crosshair;
+  width: calc(var(--box-width) + var(--padding-left) + var(--padding-right));
+  height: calc(var(--box-height) + var(--padding-top) + var(--padding-bottom)); }
+  .carousel--vertical .carousel__container {
+    height: var(--box-height);
+    display: block;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory; }
+  .carousel--vertical .carousel__box {
+    width: 100%; }
+  .carousel--vertical .carousel__box + .carousel__box {
+    margin-left: 0;
+    margin-top: var(--box-spacer); }
+
+html,
+body {
+  width: 100%; }
+
+body {
+  background-color: white; }
+
+:root {
+  --header-bar-height: 7vmax;
+  --live-all-header-stuffs-height: ""; }
+
+.page-content {
+  padding-top: var(--live-all-header-stuffs-height, var(--header-bar-height)); }
+
+.header-icon {
+  padding: 6px;
+  font-size: 1.4rem; }
+
+.page-header {
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none; }
+  .page-header > * {
+    pointer-events: all; }
+
+.page-header__bar-occupied-space {
+  height: 1.6vmin;
+  background-color: white; }
+
+.page-header__nav-bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  background-color: #eaeaeb; }
+
+.page-header__bar-bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  background-color: white; }
+
+.page-header__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-bar-height);
+  display: flex; }
+  .page-header__bar > [class*="container"] {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+    .page-header__bar > [class*="container"] > * {
+      flex: 1; }
+  .page-header__bar .logo {
+    max-width: 100px; }
+
+/* =================================================== 
+      HEADER NAVIGATION
+=================================================== */
+.header-navigation {
+  overflow: scroll;
+  position: fixed;
+  top: var(--header-bar-height);
+  left: 0;
+  right: 0;
+  bottom: 0; }
+  .header-navigation ul {
+    margin-top: 3.2vmin;
+    list-style-type: none; }
+  .header-navigation ul + ul {
+    margin-top: 8vmin; }
+  .header-navigation__item + .header-navigation__item {
+    margin-top: 1.6vmin; }
+  .header-navigation__item {
+    font-size: 2.12rem;
+    line-height: 1.2;
+    font-weight: 600;
+    font-family: "Montserrat"; }
+
+/* =================================================== 
+      HEADER BAR SECNODARY NAVIGATION
+=================================================== */
+.header-secondary-navigation ul {
+  display: flex;
+  justify-content: flex-start;
+  list-style-type: none; }
+
+.header-secondary-navigation.left .header-secondary-navigation__item:first-child {
+  margin-left: -6px; }
+
+.header-secondary-navigation.right ul {
+  justify-content: flex-end; }
+
+/* =================================================== 
+      TAXONOMY NAVIGATION BAR
+=================================================== */
+.taxonomy-navigation {
+  position: absolute;
+  top: var(--header-bar-height);
+  left: 0;
+  width: 100%;
+  background-color: white; }
+  .taxonomy-navigation ul {
+    margin-top: 1.6vmin;
+    margin-bottom: 1.6vmin;
+    overflow-x: scroll;
+    display: flex;
+    justify-content: flex-start;
+    list-style-type: none; }
+  .taxonomy-navigation__item + .taxonomy-navigation__item {
+    margin-left: 1.6vmin; }
+  .taxonomy-navigation__item {
+    border-radius: 2px;
+    border: 1px solid;
+    padding: 0.2em 1em; }
+
+/* =================================================== 
+      DEVICE BASED OVERRIDES
+=================================================== */
+@media (max-width: 767px) {
+  .header-secondary-navigation.right [data-js="search-box-trigger"] {
+    display: none; }
+  .header-secondary-navigation.right .my-account-trigger {
+    display: none; } }
+
+@media (min-width: 768px) {
+  :root {
+    --header-bar-height: 7vmin; }
+  .header-secondary-navigation.left [data-js="search-box-trigger"] {
+    display: none; }
+  .header-navigation .my-account-trigger {
+    display: none; } }
+
+.product {
+  margin-top: 1.6vmin; }
+  .product__images .carousel {
+    --padding-top: 0vw;
+    --padding-left: 0vw;
+    --padding-right: 0vw;
+    --padding-bottom: 0vw;
+    --box-width: 100%;
+    --box-spacer: 2vw;
+    --box-aspect-ratio: 12 / 9;
+    --bg-color: transparent;
+    --scrollbar-color: transparent;
+    --scrollbar-thumb-size: 0.5vw;
+    --border-radius-width: 2px; }
+  .product .btn {
+    display: block;
+    width: 100%; }
+  .product__name {
+    margin-top: 4.8vmin;
+    font-size: 2.82rem;
+    line-height: 1.125;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-family: "Montserrat"; }
+  .product__brand {
+    margin-top: 0;
+    font-size: 1rem;
+    line-height: 1.29;
+    font-weight: 300;
+    font-family: "Montserrat"; }
+  .product__price {
+    margin-top: 4.8vmin;
+    font-size: 2.82rem;
+    line-height: 1.125;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-family: "Montserrat"; }
+  .product__description {
+    margin-top: 4.8vmin;
+    font-size: 1rem;
+    line-height: 1.29;
+    font-weight: 300;
+    font-family: "Montserrat"; }
+    .product__description > * + * {
+      margin-top: 1.6vmin; }
+    .product__description ul {
+      padding-inline-start: 2em; }
+  .product__add-to-cart {
+    margin-top: 4.8vmin; }
+  .product__add-to-wishlist {
+    margin-top: 1.6vmin; }
+  .product__share {
+    margin-top: 1.6vmin;
+    text-align: center; }
+
+@media (max-width: 767px) and (min-aspect-ratio: 1 / 1) and (max-aspect-ratio: 2 / 1) {
+  .product .carousel {
+    --box-width: 20%; } }
+
+.is-large-view.product {
+  display: flex;
+  align-items: flex-start; }
+  .is-large-view.product .product__images,
+  .is-large-view.product .product__details {
+    width: 50%; }
+  .is-large-view.product .product__images {
+    margin-right: 3.2vmin; }
+  .is-large-view.product .carousel {
+    --padding-top: 0;
+    --padding-bottom: 0;
+    --padding-right: 0;
+    --padding-left: 0; }
+    .is-large-view.product .carousel__container {
+      display: block; }
+    .is-large-view.product .carousel .carousel__box + .carousel__box {
+      margin-top: var(--box-spacer);
+      margin-left: 0; }
+  .is-large-view.product .product__details {
+    position: sticky;
+    top: var(--live-all-header-stuffs-height, var(--header-bar-height));
+    top: 10px; }
+    .is-large-view.product .product__details > *:first-child {
+      margin-top: var(--live-all-header-stuffs-height, var(--header-bar-height)); }
+
+.no-fa i.fa,
+.no-fa i.fas,
+.no-fa i.far {
+  display: none; }
+
+.no-ph-reg i[class^="ph-"]:not([class*="light"]) {
+  display: none; }
+
+.no-ph-light i[class^="ph-"][class*="light"] {
+  display: none; }
+
+
+/*# sourceMappingURL=/style.a6dae8f7.css.map */
