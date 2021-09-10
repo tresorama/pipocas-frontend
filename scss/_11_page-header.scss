@@ -1,0 +1,107 @@
+:root {
+  --header-height: 7vh;
+}
+
+.page-header__bar,
+.page-content,
+.header-navigation {
+  padding-left: $space-x-md;
+  padding-right: $space-x-md;
+}
+
+.page-content {
+  padding-top: var(--header-height);
+}
+.page-header__bar-occupied-space {
+  height: var(--header-height);
+  height: $space-y-sm;
+  background-color: white;
+}
+.page-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 10;
+
+  .header-icon {
+    padding: 6px;
+    font-size: 1.4rem;
+  }
+}
+
+.page-header__nav-bg {
+  @include hasParentDimensions;
+  position: absolute;
+  z-index: -1;
+  background-color: lightgrey;
+}
+
+.page-header__bar-bg {
+  z-index: -1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  @include hasParentDimensions;
+  background-color: white;
+}
+.page-header__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  display: flex;
+  pointer-events: all;
+
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    > * {
+      flex: 1;
+    }
+  }
+  .logo {
+    max-width: 100px;
+  }
+}
+
+// NESTED BLOCKS
+// NESTED BLOCKS
+// NESTED BLOCKS
+// NESTED BLOCKS
+// NESTED BLOCKS
+// NESTED BLOCKS
+// NESTED BLOCKS
+.header-navigation {
+  overflow: scroll;
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  ul {
+    margin-top: $space-y-md;
+    list-style-type: none;
+  }
+
+  &__item + &__item {
+    margin-top: $space-y-xs;
+  }
+  &__item {
+    @include text-heading-section;
+  }
+}
+
+.header-secondary-navigation {
+  ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style-type: none;
+  }
+}

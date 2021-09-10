@@ -1,0 +1,53 @@
+.button {
+  @include text-button;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.55em 1.2em;
+  border: 2px solid;
+  border-radius: $border-radius;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border-color: var(--color-border);
+
+  &:hover,
+  &:focus {
+    background-color: var(--color-bg-active);
+    color: var(--color-text-active);
+    border-color: var(--color-border-active);
+  }
+
+  --color-text: #{$c-black};
+  --color-border: #{$c-black};
+  --color-bg: #{$c-white};
+  --color-text-active: #{$c-white};
+  --color-border-active: #{$c-grey-dark};
+  --color-bg-active: #{$c-grey-dark};
+}
+.button--text {
+  border-color: transparent;
+}
+
+.button--primary {
+  --color-text: #{$c-white};
+  --color-border: #{$c-black};
+  --color-bg: #{$c-black};
+  --color-text-active: #{$c-white};
+  --color-border-active: #{$c-grey-dark};
+  --color-bg-active: #{$c-grey-dark};
+}
+// .button--primary {
+//   --color-text: #{$c-white};
+//   --color-border: #{$c-black};
+//   --color-bg: #{$c-brand-1};
+//   --color-text-active: #{$c-white};
+//   --color-border-active: #{$c-brand-1};
+//   --color-bg-active: #{$c-brand-2};
+// }
+
+.button-icon {
+  background-color: transparent;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}

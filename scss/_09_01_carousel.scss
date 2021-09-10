@@ -1,0 +1,94 @@
+/* COMPONENT DEFINITION */
+.carousel {
+  /* INPUTABLE */
+  --padding-top: 3vw;
+  --padding-right: 3vw;
+  --padding-left: 3vw;
+  --padding-bottom: 3vw;
+
+  --box-width: 26vw;
+  --box-spacer: 3vw;
+  --box-aspect-ratio: 12 / 9;
+
+  --bg-color: white;
+  --scrollbar-color: lightgrey;
+  --scrollbar-thumb-size: 5px;
+  --border-radius-width: 2px;
+
+  /* DERIVED -  Do Not Override !! */
+  --box-height: calc(var(--box-width) * var(--box-aspect-ratio));
+  --padding-bottom-base: calc(
+    var(--padding-bottom) - var(--scrollbar-thumb-size)
+  );
+  --padding-bottom-outer: calc(var(--padding-bottom-base) * 0.5);
+  --padding-bottom-inner: calc(var(--padding-bottom-base) * 0.5);
+
+  /* style */
+  background: var(--bg-color);
+  padding-top: var(--padding-top);
+  padding-right: var(--padding-right);
+  padding-left: var(--padding-left);
+  padding-bottom: var(--padding-bottom-outer);
+  border-radius: var(--border-radius-width);
+}
+.carousel__container {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  padding-bottom: var(--padding-bottom-inner);
+
+  &::-webkit-scrollbar {
+    height: var(--scrollbar-thumb-size);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-color);
+    border-radius: 50px;
+    visibility: hidden;
+    border-radius: var(--border-radius-width);
+  }
+  &:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+  }
+}
+.carousel__box + .carousel__box {
+  margin-left: var(--box-spacer);
+}
+.carousel__box {
+  flex-shrink: 0;
+  width: var(--box-width);
+  height: var(--box-height);
+  overflow: hidden;
+  position: relative;
+  border-radius: var(--border-radius-width);
+
+  scroll-snap-align: start;
+}
+.carousel__box img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel--vertical {
+  cursor: crosshair;
+  width: calc(var(--box-width) + var(--padding-left) + var(--padding-right));
+  height: calc(var(--box-height) + var(--padding-top) + var(--padding-bottom));
+
+  .carousel__container {
+    height: var(--box-height);
+    display: block;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+  }
+
+  .carousel__box {
+    width: 100%;
+  }
+  .carousel__box + .carousel__box {
+    margin-left: 0;
+    margin-top: var(--box-spacer);
+  }
+}

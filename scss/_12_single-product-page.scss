@@ -1,0 +1,95 @@
+// SI§NGLE PROUCT PAGE
+.product {
+  margin-top: $space-y-0;
+
+  &__images {
+    .carousel {
+      --padding-top: 0vw;
+      --padding-left: 0vw;
+      --padding-right: 0vw;
+      --padding-bottom: 0vw;
+      --box-width: 100%;
+      --box-spacer: 2vw;
+      --box-aspect-ratio: 12 / 9;
+      --bg-color: transparent;
+      --scrollbar-color: transparent;
+      --scrollbar-thumb-size: 0.5vw;
+      --border-radius-width: 2px;
+    }
+  }
+
+  .button {
+    display: block;
+    width: 100%;
+  }
+
+  &__name {
+    margin-top: $space-y-lg;
+    @include text-heading-main;
+  }
+  &__brand {
+    margin-top: $space-y-0;
+    @include text-body;
+  }
+  &__price {
+    margin-top: $space-y-lg;
+    @include text-heading-main;
+  }
+  &__description {
+    margin-top: $space-y-lg;
+    @include text-body;
+
+    > * + * {
+      margin-top: $space-y-sm;
+    }
+    ul {
+      padding-inline-start: 2em;
+    }
+  }
+  &__add-to-cart {
+    margin-top: $space-y-lg;
+    @include text-body;
+  }
+  &__add-to-wishlist {
+    margin-top: $space-y-sm;
+    @include text-body;
+  }
+  &__share {
+    margin-top: $space-y-sm;
+    text-align: center;
+    @include text-body;
+  }
+}
+
+.is-large-view.product {
+  display: flex;
+  align-items: flex-start;
+
+  .product__images,
+  .product__details {
+    width: 50%;
+  }
+  .product__images {
+    margin-right: $space-x-md;
+  }
+
+  .carousel {
+    --padding-top: 0;
+    --padding-bottom: 0;
+    --padding-right: 0;
+    --padding-left: 0;
+
+    &__container {
+      display: block;
+    }
+    .carousel__box + .carousel__box {
+      margin-top: var(--box-spacer);
+      margin-left: 0;
+    }
+  }
+
+  .product__details {
+    position: sticky;
+    top: var(--header-height);
+  }
+}

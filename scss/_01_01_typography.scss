@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+$font-fam-body: "Montserrat";
+$font-fam-display: "Poppins";
+
+@mixin text-heading-main {
+  font-size: 2.82rem;
+  line-height: 1.125;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-family: $font-fam-body;
+}
+@mixin text-heading-support {
+  font-size: 1rem;
+  line-height: 1.1765;
+  font-weight: 600;
+  font-family: $font-fam-body;
+}
+@mixin text-heading-section {
+  font-size: 2.12rem;
+  line-height: 1.2;
+  font-weight: 600;
+  font-family: $font-fam-display;
+}
+
+@mixin text-body {
+  font-size: 1rem;
+  line-height: 1.29;
+  font-weight: 300;
+  font-family: $font-fam-body;
+}
+@mixin text-button {
+  font-size: 1rem;
+  line-height: 1.1765;
+  font-weight: 400;
+  font-family: $font-fam-body;
+}
+@mixin text-label {
+  font-size: 1rem;
+  line-height: 1.29;
+  font-weight: 500;
+  font-family: $font-fam-body;
+}
+
+body {
+  @include text-body;
+}

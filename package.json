@@ -1,0 +1,20 @@
+{
+  "name": "pipocas-2021-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel ./index.html --open",
+    "build": "parcel build ./index.html --public-url \"https://tresorama.github.io/pipocas-frontend/\"",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "devDependencies": {
+    "gh-pages": "^3.2.3",
+    "node-sass": "^6.0.1",
+    "parcel-bundler": "^1.12.5",
+    "sass": "^1.39.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
