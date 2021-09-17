@@ -125,6 +125,24 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.throttle = throttle;
 exports.debounce = debounce;
+exports.ObserverScroll = ObserverScroll;
+exports.duplicateElement = duplicateElement;
+exports.mediaQueryWatcher = mediaQueryWatcher;
+exports.fakeUseState = fakeUseState;
+exports.fakeUseRef = fakeUseRef;
+exports.removeCSSInlineStyle = removeCSSInlineStyle;
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 function throttle(func, delay) {
   var throttleTimer;
@@ -157,294 +175,7 @@ function debounce(func, delay) {
 
   return debounceFunction;
 }
-},{}],"js/ViewportDetailsBanner.js":[function(require,module,exports) {
-"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-/*
-
-How to import inside a codepen ?
-
-Create a new Pen.
-Go to settings => js => Add External Scripts/Pens
-
-Paste this codepen link:
-  https://codepen.io/tresorama/pen/KKmrMNz
-  
-Then in JS panel you can call :
-
-ViewportDetailsBanner();
-
-*/
-function ViewportDetailsBanner() {
-  // HOOK FOR STATE MANAGEMENT
-  var fakeUseState = function fakeUseState(initialState) {
-    var state = initialState;
-
-    var setState = function setState(newState) {
-      return new Promise(function (resolve, reject) {
-        // update state
-        state = newState; // resolve so subscribed tasks can be exexcuted
-
-        resolve(state);
-      });
-    };
-
-    var getState = function getState() {
-      return state;
-    };
-
-    return [getState, setState];
-  }; // EXTENSION - REAL TIME DEVICE NAME AND BACKGROUND
-
-
-  function ViewportDetailsBanner_showRealTimeDeviceName() {
-    // 1) business logic
-    //  - empty!!
-    // 2) view logic
-    var className = "ViewportDetailsBanner-ext-realTimeDevice";
-    var selector = ".".concat(className);
-    var isVisibleClassName = "isVisible";
-
-    var _fakeUseState = fakeUseState(false),
-        _fakeUseState2 = _slicedToArray(_fakeUseState, 2),
-        isVisible = _fakeUseState2[0],
-        setIsVisible = _fakeUseState2[1]; //  - 2a - inject dom node into dom
-
-
-    function injectDomNode() {
-      var genColorScheme = function genColorScheme(_ref) {
-        var hue = _ref.hue,
-            _ref$sat = _ref.sat,
-            sat = _ref$sat === void 0 ? 100 : _ref$sat;
-        var hs = "".concat(hue, "deg, ").concat(sat, "%");
-        return {
-          10: "hsl(".concat(hs, ", 90%)"),
-          20: "hsl(".concat(hs, ", 80%)"),
-          30: "hsl(".concat(hs, ", 70%)"),
-          40: "hsl(".concat(hs, ", 60%)"),
-          50: "hsl(".concat(hs, ", 50%)"),
-          60: "hsl(".concat(hs, ", 40%)"),
-          70: "hsl(".concat(hs, ", 30%)"),
-          80: "hsl(".concat(hs, ", 20%)"),
-          90: "hsl(".concat(hs, ", 10%)")
-        };
-      };
-
-      var col = {
-        grey: genColorScheme({
-          hue: 0,
-          sat: 0
-        }),
-        orange: genColorScheme({
-          hue: 30
-        }),
-        blue: genColorScheme({
-          hue: 200
-        })
-      };
-
-      var atMedia = function atMedia(breakpoint, content) {
-        return "\n    @media (min-width: ".concat(breakpoint, "px) {\n      ").concat(selector, " {\n       ").concat(content, "\n      }\n    }\n    ");
-      };
-
-      var domNode = "\n  <div class=\"".concat(className, "\">\n    <div class=\"bg-layer\"></div>\n    <div class=\"details\">\n      <p><label></label></p>\n    </div>\n  </div>\n  <style>\n    ").concat(selector, " {\n      z-index: 2000;\n      position: fixed;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: 100%;\n      pointer-events: none !important;\n    }\n    ").concat(selector, ":not(.").concat(isVisibleClassName, ") {\n        display: none;\n    }\n    ").concat(selector, " .bg-layer {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: 100%;\n      background-color: var(--bg, white);\n      opacity: 0.5;\n      background-blend-mode: overlay;\n    }\n    ").concat(selector, " .details label:after {\n      position: absolute;\n      top: 0;\n      right: 0;\n\n      background-color: black;\n      color: white;\n      padding: .5em 1em;\n      content: var(--label, \"Not Working\");\n    }\n\n    ").concat(atMedia(0, "--bg: white;--label:\"start\""), "\n    ").concat(atMedia(320, "--bg: ".concat(col.orange["10"], ";--label:\" 5/5s/SE\"")), "\n    ").concat(atMedia(360, "--bg: ".concat(col.orange["20"], ";--label:\"12Mini\"")), "\n    ").concat(atMedia(375, "--bg: ".concat(col.orange["30"], ";--label:\"6/7/8/X/11Pro/SE2020\"")), "\n    ").concat(atMedia(390, "--bg: ".concat(col.orange["40"], ";--label:\"12/12Pro\"")), "\n    ").concat(atMedia(414, "--bg: ".concat(col.orange["50"], ";--label:\"Plus/XR/11/11ProMax/XSMax\"")), "\n    ").concat(atMedia(428, "--bg: ".concat(col.orange["60"], ";--label:\"12ProMax\"")), "\n    ").concat(atMedia(768, "--bg: ".concat(col.blue["20"], ";--label:\"iPad-Mini\"")), "\n    ").concat(atMedia(810, "--bg: ".concat(col.blue["30"], ";--label:\"iPad-10.2\"")), "\n    ").concat(atMedia(820, "--bg: ".concat(col.blue["40"], ";--label:\"iPad-Air2020\"")), "\n    ").concat(atMedia(834, "--bg: ".concat(col.blue["50"], ";--label:\"iPad-Air-Pro11\"")), "\n    ").concat(atMedia(1024, "--bg: ".concat(col.blue["60"], ";--label:\"iPad-Pro12.9\"")), "\n    ").concat(atMedia(1280, "--bg: ".concat(col.grey["20"], ";--label:\"MacBook13\"")), "\n    ").concat(atMedia(1440, "--bg: ".concat(col.grey["40"], ";--label:\"MacBook15\"")), "\n    ").concat(atMedia(1536, "--bg: ".concat(col.blue["60"], ";--label:\"MacBook16\"")), "\n  \n  </style>\n  ");
-      document.body.insertAdjacentHTML("beforeend", domNode);
-    }
-
-    injectDomNode();
-    injectDomNode = null; // never recall
-    //  - 2b - save el referernces
-
-    var el = document.querySelector(selector); //  - 2c -visibility state
-
-    function onVisibilityChange() {
-      if (isVisible()) {
-        el.classList.add(isVisibleClassName);
-      } else {
-        el.classList.remove(isVisibleClassName);
-      }
-    }
-
-    function toggleVisibility() {
-      setIsVisible(!isVisible()).then(onVisibilityChange);
-    } // 3) first time only initialization
-
-
-    onVisibilityChange(); // ensure view match initial state
-    // 4) RETURN STUFF
-
-    return {
-      isVisible: isVisible,
-      toggleVisibility: toggleVisibility
-    };
-  }
-
-  var ext_realTimeDevice = ViewportDetailsBanner_showRealTimeDeviceName(); // MAIN COMPONENT
-
-  function showViewportDetailsBanner() {
-    var extensions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-
-    // 1) business logic
-    function updateBannerData() {
-      var width = window.innerWidth;
-      var height = window.innerHeight;
-      var ratio = width / height;
-      var aspect_ratio = {
-        base_2: ratio * 2,
-        base_3: ratio * 3,
-        base_4: ratio * 4,
-        base_5: ratio * 5,
-        base_6: ratio * 6,
-        base_7: ratio * 7,
-        base_8: ratio * 8,
-        base_9: ratio * 9,
-        base_10: ratio * 10,
-        base_11: ratio * 11
-      };
-      updateView({
-        width: width,
-        height: height,
-        ratio: ratio,
-        aspect_ratio: aspect_ratio
-      });
-    } // 2) view logic
-    //   - 2a - Inject dom node into dom
-
-
-    function injectDomNode() {
-      document.body.insertAdjacentHTML("beforeend", "\n    <div class=\"ViewportDetailsBanner value-to-left\">\n      <div class=\"left-side\">\n        <div class=\"details\">\n          <p><label>Width</label><span data-vdb-width></span></p>\n          <p><label>Height</label><span data-vdb-height></span></p>\n          <p><label>Ratio - w/h</label><span data-vdb-ratio></span></p>\n          <p><label>Aspect Ratio</label><span data-vdb-asp-ratio-2></spa></p>\n          <p><label></label><span data-vdb-asp-ratio-3></span></p>\n          <p><label></label><span data-vdb-asp-ratio-4></span></p>\n          <p><label></label><span data-vdb-asp-ratio-5></span></p>\n          <p><label></label><span data-vdb-asp-ratio-6></span></p>\n          <p><label></label><span data-vdb-asp-ratio-7></span></p>\n          <p><label></label><span data-vdb-asp-ratio-8></span></p>\n          <p><label></label><span data-vdb-asp-ratio-9></span></p>\n          <p><label></label><span data-vdb-asp-ratio-10></span></p>\n          <p><label></label><span data-vdb-asp-ratio-11></span></p>\n          <p><label>Ratio Raw</label><span data-vdb-ratio-raw></span></p>\n        </div>\n        <div class=\"credit\">\n          <p>Created by Jacopo Marrone </p>\n          <p>\n            <a href=\"https://codepen.io/tresorama/pen/KKmrMNz\">CodePen</a>\n            <a href=\"https://github.com/tresorama\">GitHub</a>\n          </p>\n        </div>\n      </div>\n      <div class=\"right-side\">\n        <div class=\"extensions\"></div>\n        <span data-vdb-toggler>OPEN</span>\n      </div>\n    </div>\n\n    <style>\n      [class*=ViewportDetailsBanner],\n      [class*=ViewportDetailsBanner] *\n      [class*=ViewportDetailsBanner-ext],\n      [class*=ViewportDetailsBanner-ext] *{\n        font-family: monospace;\n        border-radius: 1px;\n        box-sizing: border-box;\n      }\n      \n      .ViewportDetailsBanner {\n        z-index: 2000;\n        --bg-color: hsl(0,0%,5%);\n        --bg-color-soft: hsl(0,0%,10%);\n        --text-color: hsl(0,0%,95%);\n        position: fixed;\n        max-width: 95%;\n        right: 0;\n        top: 50%;\n        transform: translateY(-50%);\n        z-index: 1000;\n        background-color: var(--bg-color);\n        color: var(--text-color);\n        display: flex;\n        align-items: stretch;\n      }\n      .ViewportDetailsBanner:not(.isOpen) .left-side {\n        display: none;\n      }\n\n      .ViewportDetailsBanner .left-side,\n      .ViewportDetailsBanner .right-side {\n        min-width: 0;\n        max-height: 85vh;\n        overflow: scroll;\n      }\n\n      .ViewportDetailsBanner .right-side {\n        flex-shrink: 0;\n        display: flex;\n        flex-direction: column;\n        justify-content: center;\n        padding: 1.3vmax;\n      }\n      \n      .ViewportDetailsBanner .details {\n        margin: 2.3vw 1.3vw;\n        background: var(--bg-color-soft);\n        overflow: scroll;\n      }\n\n      .ViewportDetailsBanner .details > p {\n        padding-inline-start: 1.5vmin;\n        padding-inline-end: 3vmin;\n        margin-block-start: 1vmin;\n        margin-block-end: 0vmin;\n        width: 20em;\n        display: flex;\n        flex-direction: row;\n        justify-content: space-between;\n      }\n      .ViewportDetailsBanner .details label:not(:empty):after {\n        content: \" :\";\n      }\n      \n      .ViewportDetailsBanner.value-to-left .details > p {\n        flex-direction: row-reverse;\n      }\n      .ViewportDetailsBanner.value-to-left .details label:not(:empty):after {\n        content: none;\n      }\n      \n      .ViewportDetailsBanner .extensions {\n      }\n      .ViewportDetailsBanner .extensions p {\n        margin-block-start: 1.5vmin;\n        margin-block-end: 3vmin;\n      }\n      \n      .ViewportDetailsBanner .extensions input {\n        vertical-align: middle;\n        margin: 0;\n      }\n\n      .ViewportDetailsBanner [data-vdb-toggler] {\n        background-color: var(--text-color);\n        color: var(--bg-color);\n        display: inline-block;\n        text-align: center;\n        padding: 0.35em 0.7em;\n      }\n      \n      .ViewportDetailsBanner .credit  {\n        margin: 1.3vw 1.3vw;\n        color: inherit;\n        \n      }\n      .ViewportDetailsBanner a  {\n        color: inherit;\n      }\n\n      </style>\n    ");
-    }
-
-    injectDomNode();
-    injectDomNode = null; // never recall
-    //   - 2b - save el refernces
-
-    var bannerNode = document.querySelector(".ViewportDetailsBanner");
-    var bannerTogglerNode = bannerNode.querySelector("[data-vdb-toggler]");
-    var bannerExtensionsNode = bannerNode.querySelector(".extensions"); //   - 2c - visibility state
-
-    var _fakeUseState3 = fakeUseState(false),
-        _fakeUseState4 = _slicedToArray(_fakeUseState3, 2),
-        isOpen = _fakeUseState4[0],
-        setIsOpen = _fakeUseState4[1];
-
-    function onVisibilityChange() {
-      if (isOpen()) {
-        bannerNode.classList.add("isOpen");
-        bannerTogglerNode.innerHTML = "CLOSE";
-      } else {
-        bannerNode.classList.remove("isOpen");
-        bannerTogglerNode.innerHTML = "OPEN";
-      }
-    }
-
-    function toggleBannerVisibility() {
-      setIsOpen(!isOpen()).then(onVisibilityChange);
-    } //   - 2d - update view from business logic data
-
-
-    function updateView(_ref2) {
-      var width = _ref2.width,
-          height = _ref2.height,
-          ratio = _ref2.ratio,
-          aspect_ratio = _ref2.aspect_ratio;
-
-      var cleanNumber = function cleanNumber(num) {
-        return Number(num).toFixed(2);
-      };
-
-      bannerNode.querySelector("[data-vdb-width]").innerHTML = "".concat(width, " px");
-      bannerNode.querySelector("[data-vdb-height]").innerHTML = "".concat(height, " px");
-      bannerNode.querySelector("[data-vdb-ratio-raw]").innerHTML = "".concat(ratio);
-      bannerNode.querySelector("[data-vdb-ratio]").innerHTML = "".concat(cleanNumber(ratio));
-      bannerNode.querySelector("[data-vdb-asp-ratio-2]").innerHTML = "".concat(cleanNumber(aspect_ratio.base_2), " / 2");
-      bannerNode.querySelector("[data-vdb-asp-ratio-3]").innerHTML = "".concat(cleanNumber(aspect_ratio.base_3), " / 3");
-      bannerNode.querySelector("[data-vdb-asp-ratio-4]").innerHTML = "".concat(cleanNumber(aspect_ratio.base_4), " / 4");
-      bannerNode.querySelector("[data-vdb-asp-ratio-5]").innerHTML = "".concat(cleanNumber(aspect_ratio.base_5), " / 5");
-      bannerNode.querySelector("[data-vdb-asp-ratio-6]").innerHTML = "".concat(cleanNumber(aspect_ratio.base_6), " / 6");
-      bannerNode.querySelector("[data-vdb-asp-ratio-7]").innerHTML = "".concat(cleanNumber(aspect_ratio.base_7), " / 7");
-      bannerNode.querySelector("[data-vdb-asp-ratio-8]").innerHTML = "".concat(cleanNumber(aspect_ratio.base_8), " / 8");
-      bannerNode.querySelector("[data-vdb-asp-ratio-9]").innerHTML = "".concat(cleanNumber(aspect_ratio.base_9), " / 9");
-      bannerNode.querySelector("[data-vdb-asp-ratio-10]").innerHTML = "".concat(cleanNumber(aspect_ratio.base_10), " / 10");
-      bannerNode.querySelector("[data-vdb-asp-ratio-11]").innerHTML = "".concat(cleanNumber(aspect_ratio.base_11), " / 12");
-    } //   - 2e - dom event listener
-
-
-    bannerTogglerNode.addEventListener("click", function () {
-      return toggleBannerVisibility();
-    });
-    window.addEventListener("resize", function () {
-      return updateBannerData();
-    }); // 3) init extensions
-
-    extensions.forEach(function (extension, index) {
-      var key = extension.key,
-          displayedText = extension.displayedText,
-          initialState = extension.initialState,
-          onClick = extension.onClick;
-      var htmlFor = "extension-".concat(index, "-").concat(key);
-      bannerExtensionsNode.insertAdjacentHTML("beforeend", "\n    <p>\n      <input name=\"".concat(htmlFor, "\" type=\"checkbox\"/>\n      <label for=\"").concat(htmlFor, "\">").concat(displayedText, "</label>\n    </p>\n    "));
-      var domNode = bannerExtensionsNode.querySelector("input[name=\"".concat(htmlFor, "\"]"));
-      domNode.checked = initialState;
-      domNode.addEventListener("click", onClick);
-    }); // 4) first time only initialization
-
-    updateBannerData(); //run to populate initial data
-  }
-
-  showViewportDetailsBanner([{
-    key: "realTimeDevice",
-    displayedText: "Device",
-    initialState: ext_realTimeDevice.isVisible(),
-    onClick: ext_realTimeDevice.toggleVisibility
-  }]);
-}
-
-var _default = ViewportDetailsBanner;
-exports.default = _default;
-},{}],"js/script.js":[function(require,module,exports) {
-"use strict";
-
-var _frontendUtilities = require("./frontend-utilities.js");
-
-var _ViewportDetailsBanner = _interopRequireDefault(require("./ViewportDetailsBanner.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-//ViewportDetailsBanner();
-
-/* ===================================================
-  Frontend Utilities      
-=================================================== */
 function ObserverScroll(options) {
   //utilities
   var callArrayOfFunction = function callArrayOfFunction(a, args) {
@@ -478,8 +209,106 @@ function ObserverScroll(options) {
     lastScrollDirection = scrollDirection;
   };
 
-  window.addEventListener("scroll", (0, _frontendUtilities.throttle)(handler, 200));
+  window.addEventListener("scroll", throttle(handler, 200));
 }
+
+function duplicateElement(_ref) {
+  var selector = _ref.selector,
+      _ref$times = _ref.times,
+      times = _ref$times === void 0 ? 1 : _ref$times,
+      elementModifierCallback = _ref.elementModifierCallback;
+  if (!selector) return; //abort
+
+  var template = document.querySelector(selector);
+
+  if (!template) {
+    throw new Error("\n    Frontend Utilites - duplicateElement - Error :\n      No el matches selector.\n      selector => ".concat(selector, "\n    "));
+  }
+
+  new Array(times).fill("not-null-value").map(function (unused, index) {
+    var clone = template.cloneNode(true);
+    elementModifierCallback && elementModifierCallback(clone, index);
+    template.parentElement.appendChild(clone);
+  });
+}
+
+function mediaQueryWatcher(mediaQueryString, onMatchChange) {
+  // get a MediaQueryObject
+  var mql = window.matchMedia(mediaQueryString); // when media query match status change run callback
+
+  mql.addEventListener("change", function (e) {
+    onMatchChange(e.matches);
+  }); // run once at page load
+
+  onMatchChange(mql.matches);
+}
+
+function fakeUseState(initialState) {
+  var state = initialState;
+
+  var setState = function setState(newState) {
+    return new Promise(function (resolve, reject) {
+      // update state
+      state = newState; // resolve so subscribed tasks can be exexcuted
+
+      resolve(state);
+    });
+  };
+
+  var getState = function getState() {
+    return state;
+  };
+
+  return [getState, setState];
+}
+
+function fakeUseRef(intialValue) {
+  var ref = {
+    current: intialValue || null
+  };
+
+  var getRef = function getRef() {
+    return ref.current;
+  };
+
+  var updateRef = function updateRef(newValue) {
+    ref.current = newValue;
+  };
+
+  return [getRef, updateRef];
+}
+
+function removeCSSInlineStyle(el) {
+  el.removeAttribute("style");
+}
+},{}],"js/script.js":[function(require,module,exports) {
+"use strict";
+
+var _frontendUtilities = require("./frontend-utilities.js");
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+// import ViewportDetailsBanner from "./ViewportDetailsBanner.js";
+//ViewportDetailsBanner();
+
+/* =================================================== 
+      DEVELOPEMTN ONLY
+=================================================== */
+(function () {
+  var styleSheet = document.createElement("style");
+  styleSheet.innerHTML = "\n    .taxonomy-navigation {\n      display: none;\n    }\n  ";
+  document.head.appendChild(styleSheet);
+})();
 /* =================================================== 
   Initialize Global Object That Contains all UI animation
 =================================================== */
@@ -487,215 +316,383 @@ function ObserverScroll(options) {
 
 window._UI = {};
 /* =================================================== 
-  Build UI Animation
+  SHARED PAGE STUFF
 =================================================== */
-// build UI ANIMATION -> Header Navigation
 
-(function () {
-  var openTimeline = function () {
-    var tl = gsap.timeline({
+(function (iMustRun) {
+  if (!iMustRun) return; // UI ANIMATION -> Header Navigation
+
+  (function () {
+    var openTimeline = gsap.timeline({
       paused: true,
       defaults: {
         duration: 0.3,
         ease: "ease"
       }
-    });
-    tl.from(".page-header__nav-bg", {
+    }).from(".page-header__nav-bg", {
       top: "-100%"
-    });
-    tl.from(".page-header .header-navigation", {
+    }).from(".page-header .header-navigation", {
       x: "-100%"
-    }, "<");
-    tl.from(".page-header .header-navigation__item", {
+    }, "<").from(".page-header .header-navigation__item", {
       x: "-100%",
       stagger: 0.02
     }, "<");
-    return tl;
-  }();
-
-  window._UI.headerNavigation = {
-    isOpen: false,
-    open: function open() {
-      if (this.isOpen) return;
-      this.isOpen = true;
-      openTimeline.play();
-    },
-    close: function close() {
-      if (!this.isOpen) return;
-      this.isOpen = false;
-      openTimeline.reverse();
-    },
-    toggle: function toggle() {
-      if (this.isOpen) this.close();else this.open();
-    }
-  };
-})(); // build UI ANIMATION -> Header Bar Show/Hide
+    window._UI.headerNavigation = {
+      isOpen: false,
+      open: function open() {
+        if (this.isOpen) return;
+        this.isOpen = true;
+        openTimeline.play();
+      },
+      close: function close() {
+        if (!this.isOpen) return;
+        this.isOpen = false;
+        openTimeline.reverse();
+      },
+      toggle: function toggle() {
+        if (this.isOpen) this.close();else this.open();
+      }
+    };
+  })(); // UI ANIMATION -> Header Bar Show/Hide
 
 
-(function () {
-  var headerSelector = ".page-header";
-  var headerBarSelector = ".page-header__bar";
-  var taxonomyNavigationSelector = ".taxonomy-navigation";
-  window._UI.headerBar = {
-    isVisible: true,
-    show: function show() {
-      if (this.isVisible) return;
-      this.isVisible = true;
-      gsap.to(headerSelector, {
-        top: 0,
-        duration: 0.1
+  (function () {
+    var headerSelector = ".page-header";
+    var headerBarSelector = ".page-header__bar";
+    var taxonomyNavigationSelector = ".taxonomy-navigation";
+    window._UI.headerBar = {
+      isVisible: true,
+      show: function show() {
+        if (this.isVisible) return;
+        this.isVisible = true;
+        gsap.to(headerSelector, {
+          top: 0,
+          duration: 0.1
+        });
+      },
+      hide: function hide() {
+        if (!this.isVisible) return;
+        this.isVisible = false;
+        gsap.to(headerSelector, {
+          top: -this.getHeight(),
+          duration: 0.1
+        });
+      },
+      getHeight: function getHeight() {
+        var headerBarHeight = document.querySelector(headerBarSelector).getBoundingClientRect().height || 0;
+        var taxonomyNavigationHeight = document.querySelector(taxonomyNavigationSelector).getBoundingClientRect().height || 0;
+        return headerBarHeight + taxonomyNavigationHeight;
+      },
+      setHeightCustomProperty: function setHeightCustomProperty() {
+        var height = this.getHeight();
+        document.documentElement.style.setProperty(cssCustomPropName, "".concat(height, "px"));
+      }
+    };
+  })(); // EVENT LISTENER -> hamburger
+
+
+  document.querySelector("[data-js=header-navigation-mobile-trigger]").addEventListener("click", function () {
+    window._UI.headerNavigation.toggle();
+  }); // EVENT LISTENER -> header-navigation auto show/hide
+
+  new _frontendUtilities.ObserverScroll({
+    onAfter: [function (_ref) {
+      var scrollDirection = _ref.scrollDirection,
+          scrollPos = _ref.scrollPos,
+          bodyBoundingClientRect = _ref.bodyBoundingClientRect;
+
+      // functions
+      var getHeaderHeight = function getHeaderHeight() {
+        return window._UI.headerBar.getHeight();
+      };
+
+      var headerNavigationIsOpen = function headerNavigationIsOpen() {
+        return window._UI.headerNavigation.isOpen;
+      };
+
+      var showHeader = function showHeader() {
+        return window._UI.headerBar.show();
+      };
+
+      var hideHeader = function hideHeader() {
+        return window._UI.headerBar.hide();
+      };
+
+      var threshold = function threshold() {
+        return 10; // absolute thresould in px
+
+        return getHeaderHeight();
+      }; // logic
+
+
+      if (headerNavigationIsOpen()) {
+        showHeader();
+        return;
+      }
+
+      if (scrollDirection === "UP") {
+        showHeader();
+        return;
+      }
+
+      if (scrollPos <= -threshold()) {
+        hideHeader();
+        return;
+      }
+    }]
+  }); // ADDITIONAL UI STUFF -> disable window scroll when header-navigation is open
+
+  (function () {
+    var scrollPos = 0;
+
+    var saveScrollPosition = function saveScrollPosition() {
+      scrollPos = document.body.getBoundingClientRect().top;
+    };
+
+    var restoreScrollPosition = function restoreScrollPosition() {
+      window.scrollTo({
+        x: 0,
+        y: scrollPos
       });
-    },
-    hide: function hide() {
-      if (!this.isVisible) return;
-      this.isVisible = false;
-      gsap.to(headerSelector, {
-        top: -this.getHeight(),
-        duration: 0.1
-      });
-    },
-    getHeight: function getHeight() {
-      var headerBarHeight = document.querySelector(headerBarSelector).getBoundingClientRect().height || 0;
-      var taxonomyNavigationHeight = document.querySelector(taxonomyNavigationSelector).getBoundingClientRect().height || 0;
-      return headerBarHeight + taxonomyNavigationHeight;
-    },
-    setHeightCustomProperty: function setHeightCustomProperty() {
-      var height = this.getHeight();
-      document.documentElement.style.setProperty(cssCustomPropName, "".concat(height, "px"));
-    }
-  };
-})();
-/* =================================================== 
-  ADD EVENT LISTENER THAT TRIGGER UI ANIMATION
-=================================================== */
+    };
+
+    document.querySelector("[data-js=header-navigation-mobile-trigger]").addEventListener("click", function () {
+      if (window._UI.headerNavigation.isOpen) {
+        document.body.style.overflow = "hidden";
+        saveScrollPosition();
+      } else {
+        document.body.style.overflow = null;
+        restoreScrollPosition();
+      }
+    });
+  })(); // ADDITIONAL UI STUFF -> CSS Custom Prop Value Update -> Header Height
 
 
-document.querySelector("[data-js=header-navigation-mobile-trigger]").addEventListener("click", function () {
-  window._UI.headerNavigation.toggle();
-}); // header-navigation auto show/hide
+  (function () {
+    var cssCustomPropName = "--live-all-header-stuffs-height";
 
-new ObserverScroll({
-  onAfter: [function (_ref) {
-    var scrollDirection = _ref.scrollDirection,
-        scrollPos = _ref.scrollPos,
-        bodyBoundingClientRect = _ref.bodyBoundingClientRect;
-
-    // functions
-    var getHeaderHeight = function getHeaderHeight() {
+    var getHeight = function getHeight() {
       return window._UI.headerBar.getHeight();
     };
 
-    var headerNavigationIsOpen = function headerNavigationIsOpen() {
-      return window._UI.headerNavigation.isOpen;
+    var setHeightCustomProperty = function setHeightCustomProperty() {
+      var height = getHeight();
+      document.documentElement.style.setProperty(cssCustomPropName, "".concat(height, "px"));
     };
 
-    var showHeader = function showHeader() {
-      return window._UI.headerBar.show();
-    };
-
-    var hideHeader = function hideHeader() {
-      return window._UI.headerBar.hide();
-    };
-
-    var threshold = function threshold() {
-      return 10; // absolute thresould in px
-
-      return getHeaderHeight();
-    }; // logic
-
-
-    if (headerNavigationIsOpen()) {
-      showHeader();
-      return;
-    }
-
-    if (scrollDirection === "UP") {
-      showHeader();
-      return;
-    }
-
-    if (scrollPos <= -threshold()) {
-      hideHeader();
-      return;
-    }
-  }]
-});
-/* =================================================== 
-      ADDITIONAL UI STUFF
-=================================================== */
-// disable window scroll when header-navigation is open
-
-(function () {
-  var scrollPos = 0;
-
-  var saveScrollPosition = function saveScrollPosition() {
-    scrollPos = document.body.getBoundingClientRect().top;
-  };
-
-  var restoreScrollPosition = function restoreScrollPosition() {
-    window.scrollTo({
-      x: 0,
-      y: scrollPos
-    });
-  };
-
-  document.querySelector("[data-js=header-navigation-mobile-trigger]").addEventListener("click", function () {
-    if (window._UI.headerNavigation.isOpen) {
-      document.body.style.overflow = "hidden";
-      saveScrollPosition();
-    } else {
-      document.body.style.overflow = null;
-      restoreScrollPosition();
-    }
-  });
-})(); // CSS Custom Prop Value Update -> Header Height
-
-
-(function () {
-  var cssCustomPropName = "--live-all-header-stuffs-height";
-
-  var getHeight = function getHeight() {
-    return window._UI.headerBar.getHeight();
-  };
-
-  var setHeightCustomProperty = function setHeightCustomProperty() {
-    var height = getHeight();
-    document.documentElement.style.setProperty(cssCustomPropName, "".concat(height, "px"));
-  };
-
-  setHeightCustomProperty();
-  window.addEventListener("resize", (0, _frontendUtilities.throttle)(setHeightCustomProperty, 200));
-})();
+    setHeightCustomProperty();
+    window.addEventListener("resize", (0, _frontendUtilities.throttle)(setHeightCustomProperty, 200));
+  })();
+})(true);
 /* =================================================== 
       SINGLE PRODUCT PAGE ONLY
 =================================================== */
-// switch between mobile visual and desktop visual if screen width is enough wide
 
 
-(function () {
-  var breakpoint = 768; //breakpoint = 500;
+(function (iMustRun) {
+  if (!iMustRun) return; // switch between mobile visual and desktop visual if screen width is enough wide
 
-  var className = "is-large-view";
+  (function () {
+    var desktopMediaQuery = "(min-width: 768px)";
+    var className = "is-large-view";
 
-  var getEl = function getEl() {
-    return document.querySelector(".page-content .product");
-  };
+    var getEl = function getEl() {
+      return document.querySelector(".page-content .product");
+    };
 
-  if (!getEl()) return; // element not present in page
+    (0, _frontendUtilities.mediaQueryWatcher)(desktopMediaQuery, function (matches) {
+      if (matches) {
+        //desktop
+        getEl().classList.add(className);
+      } else {
+        //mobile
+        getEl().classList.remove(className);
+      }
+    });
+  })();
+})(document.body.classList.contains("SINGLE-PRODUCT-PAGE"));
+/* =================================================== 
+      PRODUCT-LIST PAGE ONLY
+=================================================== */
 
-  var maybeConvert = function maybeConvert() {
-    if (window.innerWidth >= breakpoint) {
-      getEl().classList.add(className);
-    } else {
-      getEl().classList.remove(className);
-    }
-  };
 
-  maybeConvert(); // run one at page load
+(function (iMustRun) {
+  if (!iMustRun) return; // duplicate product list item some times for development ...
 
-  window.addEventListener("resize", (0, _frontendUtilities.throttle)(maybeConvert, 200));
-})();
-},{"./frontend-utilities.js":"js/frontend-utilities.js","./ViewportDetailsBanner.js":"js/ViewportDetailsBanner.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+  (function () {
+    (0, _frontendUtilities.duplicateElement)({
+      selector: ".product-grid__item",
+      times: 16
+    });
+  })(); // filter bar panels open/close => TOGGLE CLASS VERSION
+  // need also this file:
+  // scss/_12_product-list-page__filter-bar-panel-with-css-transition.scss
+
+
+  (function () {
+    if (document.body.classList.contains("FILTER-BAR-PANEL__USE-GSAP")) return;
+    var panels = document.querySelectorAll(".filter-bar [data-js-dropdown-target]");
+    var triggers = document.querySelectorAll(".filter-bar [data-js-dropdown-trigger]");
+    var closers = document.querySelectorAll(".filter-bar [data-js-dropdown-closer]");
+    if (!panels.length) return; // build timeline for each panel
+
+    var getKeyFrom = {
+      panel: function panel(el) {
+        return el.getAttribute("data-js-dropdown-target");
+      },
+      trigger: function trigger(el) {
+        return el.getAttribute("data-js-dropdown-trigger");
+      },
+      closer: function closer(el) {
+        return el.getAttribute("data-js-dropdown-closer");
+      }
+    };
+
+    var getPanelByKey = function getPanelByKey(key) {
+      return document.querySelector("[data-js-dropdown-target*=\"".concat(key, "\"]"));
+    };
+
+    var isOpenClassName = "panel-is-opened";
+    triggers.forEach(function (trigger) {
+      trigger.addEventListener("click", function () {
+        var key = getKeyFrom.trigger(this);
+        var panel = getPanelByKey(key);
+        panel.classList.toggle(isOpenClassName);
+      });
+    });
+    closers.forEach(function (closers) {
+      closers.addEventListener("click", function () {
+        var key = getKeyFrom.closer(this);
+        var panel = getPanelByKey(key);
+        panel.classList.remove(isOpenClassName);
+      });
+    });
+  })(); // filter bar panels open/close => GSAP ONLY VERSION
+
+
+  (function () {
+    if (!document.body.classList.contains("FILTER-BAR-PANEL__USE-GSAP")) return;
+    var panels = document.querySelectorAll(".filter-bar [data-js-dropdown-target]");
+    var triggers = document.querySelectorAll(".filter-bar [data-js-dropdown-trigger]");
+    var closers = document.querySelectorAll(".filter-bar [data-js-dropdown-closer]");
+    if (!panels.length) return; // function that build timeline for a filter-bar__panel
+
+    var desktopMediaQuery = "(min-width: 768px)";
+
+    var buildTimeline = function buildTimeline(panelEl, isMobile) {
+      // add necessary static inline style
+      panelEl.style.overflow = "hidden";
+      panelEl.style.transformOrigin = "top"; // reset inline css style animated by previous timeline
+
+      gsap.to(panelEl, {
+        duration: 0,
+        yPercent: 0,
+        scaleY: 1
+      });
+      gsap.to(panelEl.children, {
+        duration: 0,
+        opacity: 1
+      }); // build new timeline
+
+      var options = {
+        paused: true,
+        defaults: {
+          duration: 0.2
+        }
+      };
+
+      if (isMobile) {
+        return gsap.timeline(options).from(panelEl, {
+          yPercent: -100
+        }).from(panelEl.children, {
+          opacity: 0
+        });
+      } else {
+        return gsap.timeline(options).from(panelEl, {
+          scaleY: 0
+        }).from(panelEl.children, {
+          opacity: 0
+        });
+      }
+    }; // function that help to retrieve key from dom element, based on type
+
+
+    var getKeyFrom = {
+      panel: function panel(el) {
+        return el.getAttribute("data-js-dropdown-target");
+      },
+      trigger: function trigger(el) {
+        return el.getAttribute("data-js-dropdown-trigger");
+      },
+      closer: function closer(el) {
+        return el.getAttribute("data-js-dropdown-closer");
+      }
+    }; // class that:
+    // - keep timeline state
+    // - rebuild timeline on screen size change
+    // - expose methods for open/close panel
+
+    function PanelOpener(panel) {
+      // const [getTimeline, setTimeline] = fakeUseState(null);
+      var _fakeUseRef = (0, _frontendUtilities.fakeUseRef)(),
+          _fakeUseRef2 = _slicedToArray(_fakeUseRef, 2),
+          getTimeline = _fakeUseRef2[0],
+          setTimeline = _fakeUseRef2[1];
+
+      (0, _frontendUtilities.mediaQueryWatcher)(desktopMediaQuery, function (matches) {
+        var isMobile = !matches;
+        setTimeline(buildTimeline(panel, isMobile));
+      });
+      return {
+        isOpen: false,
+
+        get openTimeline() {
+          return getTimeline();
+        },
+
+        open: function open() {
+          if (this.isOpen) return;
+          this.openTimeline.play();
+          this.isOpen = true;
+        },
+        close: function close() {
+          if (!this.isOpen) return;
+          this.openTimeline.reverse();
+          this.isOpen = false;
+        },
+        toggle: function toggle() {
+          if (!this.isOpen) {
+            this.open();
+          } else {
+            this.close();
+          }
+        }
+      };
+    } // for each panel ...
+
+
+    var all = {};
+    panels.forEach(function (panel) {
+      var key = getKeyFrom.panel(panel);
+      all[key] = new PanelOpener(panel);
+    });
+    triggers.forEach(function (trigger) {
+      trigger.addEventListener("click", function () {
+        var key = getKeyFrom.trigger(this);
+        all[key].toggle();
+      });
+    });
+    closers.forEach(function (closers) {
+      closers.addEventListener("click", function () {
+        var key = getKeyFrom.closer(this);
+        all[key].close();
+      });
+    }); // save in global _UI object
+
+    window._UI.filterBarPanels = all;
+  })();
+})(document.body.classList.contains("PRODUCT-LIST-PAGE"));
+},{"./frontend-utilities.js":"js/frontend-utilities.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -723,7 +720,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52383" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62615" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
