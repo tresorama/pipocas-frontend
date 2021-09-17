@@ -1,0 +1,28 @@
+.filter-bar {
+  $panel-anim-time: 0.2s;
+
+  body:not(.FILTER-BAR-PANEL__USE-GSAP) &__panel {
+    transform-origin: top;
+    transition: transform $panel-anim-time $panel-anim-time;
+    > * {
+      opacity: 0;
+      transition: opacity $panel-anim-time;
+    }
+
+    &.panel-is-opened {
+      transform: none;
+      transition-delay: 0s;
+      > * {
+        opacity: 1;
+        transition-delay: $panel-anim-time;
+      }
+    }
+    @media (max-width: 767px) {
+      transform: translateY(-100%);
+    }
+
+    @media (min-width: 768px) {
+      transform: scaleY(0);
+    }
+  }
+}

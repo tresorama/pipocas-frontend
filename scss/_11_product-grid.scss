@@ -1,0 +1,45 @@
+.product-grid {
+}
+
+/* =================================================== 
+      PATTERN 1
+=================================================== */
+.pattern-1 .product-grid {
+  --gap: #{$space-x-md};
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 768px) {
+    &__list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (min-width: 900px) {
+    &__list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+/* =================================================== 
+      PATTERN 2
+=================================================== */
+.pattern-2 .product-grid {
+  --gap: #{$space-x-md};
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--gap);
+  }
+  @media (min-width: 768px) {
+    &__list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    &__item:nth-child(9n + 3) {
+      grid-column: auto / span 2;
+      grid-row: auto / span 2;
+    }
+  }
+}

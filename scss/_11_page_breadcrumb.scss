@@ -1,0 +1,17 @@
+.breadcrumb {
+  ul {
+    list-style-type: none;
+  }
+  &__list {
+    display: flex;
+  }
+  &__item {
+    :after {
+      content: "❭";
+      margin-left: $space-x-xs;
+    }
+  }
+  &__item + &__item {
+    margin-left: $space-x-xs;
+  }
+}

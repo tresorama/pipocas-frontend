@@ -16,13 +16,18 @@
 // organism
 // external components
 @import "./09_01_carousel";
+@import "./09_02_nav_slider";
 
 // every page shared global syles
 @import "./10_global_styles";
 @import "./11_page-header";
+@import "./11_page_breadcrumb";
+@import "./11_product-grid";
 
 // single pages implementation
 @import "./12_single-product-page";
+@import "./12_product-list-page";
+@import "./12_product-list-page__filter-bar-panel-with-css-transition";
 
 .no-fa i.fa,
 .no-fa i.fas,

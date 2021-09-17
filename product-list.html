@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pipocas - Single Product</title>
+    <title>Pipocas - Product List</title>
 
     <!-- FONT AWESOME -->
     <link
@@ -19,8 +19,10 @@
     <!-- CSS -->
     <link rel="stylesheet" href="scss/style.scss" />
   </head>
-  <body class="SINGLE-PRODUCT-PAGE no-fa no-ph-light">
-    <!-- HEADER WITH NAVIGATION -->
+  <body class="PRODUCT-LIST-PAGE no-fa no-ph-light FILTER-BAR-PANEL__USE-GSAP">
+    <!-- 
+      HEADER WITH NAVIGATION
+    -->
     <div class="page-header">
       <!-- Little Frame at Top of Screen -->
       <div class="page-header__bar-occupied-space"></div>
@@ -116,90 +118,93 @@
       CONTENT
     -->
     <div class="page-content">
-      <div class="container">
-        <!-- BREADCRUMB -->
-        <!-- SINGLE PRODCUT COMPONENT -->
-        <div class="product">
-          <div class="product__images">
-            <div class="carousel my-carousel-1">
-              <div class="carousel__container">
-                <div class="carousel__box">
-                  <img src="./assets/images/products/6/1.jpeg" />
-                </div>
-                <div class="carousel__box">
-                  <img src="./assets/images/products/6/2.jpg" />
-                </div>
-                <div class="carousel__box">
-                  <img src="./assets/images/products/6/3.jpg" />
-                </div>
-                <div class="carousel__box">
-                  <img src="./assets/images/products/6/4.jpg" />
-                </div>
-                <div class="carousel__box">
-                  <img src="./assets/images/products/6/5.jpg" />
-                </div>
-                <div class="carousel__box">
-                  <img src="./assets/images/products/6/6.jpg" />
-                </div>
+      <!-- BREADCRUMB -->
+      <div class="breadcrumb">
+        <div class="container">
+          <ul class="breadcrumb__list">
+            <li class="breadcrumb__item"><a href="#">Home</a></li>
+            <li class="breadcrumb__item"><a href="#">All</a></li>
+            <li class="breadcrumb__item"><a href="#">Donna</a></li>
+            <li class="breadcrumb__item"><a href="#">Pantaloni</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FILTER BAR -->
+      <div class="filter-bar">
+        <div class="container">
+          <!-- FILTER BAR - FILTER BY -->
+          <div class="filter-bar__item filter-by">
+            <span class="filter-bar__title" data-js-dropdown-trigger="filter-by">Filtra</span>
+            <div class="filter-bar__panel" data-js-dropdown-target="filter-by">
+              <span class="filter-bar__panel-title">Filtra</span>
+              <button class="filter-bar__panel-closer" data-js-dropdown-closer="filter-by">
+                Chiudi
+              </button>
+
+              <div class="filter-by__brand">
+                <span>Brand</span>
+                <ul>
+                  <li>Brand1</li>
+                  <li>Brand2</li>
+                  <li>Brand3</li>
+                  <li>Brand4</li>
+                  <li>Brand5</li>
+                  <li>Brand6</li>
+                  <li>Brand7</li>
+                  <li>Brand8</li>
+                </ul>
+              </div>
+              <div class="filter-by__size">
+                <span>Size</span>
+                <ul>
+                  <li>XS</li>
+                  <li>S</li>
+                  <li>M</li>
+                  <li>L</li>
+                  <li>XL</li>
+                  <li>XXL</li>
+                </ul>
               </div>
             </div>
           </div>
 
-          <div class="product__details">
-            <div class="product__name">Maglia Pajette Fresca</div>
-            <div class="product__brand">Mariella Burani</div>
-            <div class="product__price">€ 50</div>
-            <div class="product__description">
-              <p>
-                Mariella Burani vintage, prima linea, pailettes con disegno floreale, taglia 42
-                (veste XS/S).
-              </p>
-            </div>
-            <div class="product__add-to-cart">
-              <button class="btn btn--s-contained btn--c-primary">Aggiungi Al Carrello</button>
-            </div>
-            <div class="product__add-to-wishlist">
-              <button class="btn btn--s-contained">Aggiungi Alla Wishlist</button>
-            </div>
-            <div class="product__share">
-              <button class="btn btn--s-text">Condividi</button>
-            </div>
-
-            <!-- <div class="product__description">
-              <p>
-                70s handmade daisy dress, slightly A line, with contrast pattern
-                at the bottom. This strap dress can turn a simple moment into a
-                celebration: the cotton fabric is the canvas of a flower party,
-                which will make you feel the warm season has arrived and you are
-                now part of it.
-              </p>
+          <!-- FILTER BAR - ORDER BY -->
+          <div class="filter-bar__item order-by">
+            <span class="filter-bar__title" data-js-dropdown-trigger="order-by">Ordina</span>
+            <div class="filter-bar__panel" data-js-dropdown-target="order-by">
+              <span class="filter-bar__panel-title">Ordinamento</span>
+              <button class="filter-bar__panel-closer" data-js-dropdown-closer="order-by">
+                Chiudi
+              </button>
               <ul>
-                <li>Not branded: it is handmade</li>
-                <li>No marked size</li>
-                <li>Fits best a size XS/S (size conversion chart)</li>
-                <li>
-                  Garment measurements - Chest: 38cm; Waist: 46cm; Hips: 53cm;
-                  Length: 138cm All measurements are taken from flat garments,
-                  to make it easier for you to compare with something you
-                  already own. To calculate the circumferences, you only need to
-                  double them up.
-                </li>
-                <li>
-                  Federica's (model) measurements: C 86cm; W 68cm; H 95cm;
-                  Height 1,70m
-                </li>
-                <li>Fabric not specified (we assume: cotton)</li>
-                <li>Cold wash max 30C - No tumble drying</li>
-                <li>Found in Italy</li>
-                <li>Very good conditions</li>
+                <li>Recente</li>
+                <li>Prezzo basso alto</li>
+                <li>Prezzo alto basso</li>
               </ul>
-            </div> -->
+            </div>
           </div>
         </div>
-        <!-- CROSS-SELL PRODUCT MINI GRID -->
-        <div class="cross-sell-products" style="height: 300px"></div>
-        <!-- FOOTER -->
       </div>
+
+      <!-- PRODUCT-GRID -->
+      <div class="product-grid pattern-1">
+        <div class="container">
+          <div class="product-grid__list">
+            <div class="product-grid__item">
+              <div class="product-image">
+                <img src="/assets/images/products/2/1.jpg" />
+              </div>
+              <div class="product-details">
+                <div class="product-name">Pantalone Scuro</div>
+                <div class="product-price">€50</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
     </div>
 
     <!--

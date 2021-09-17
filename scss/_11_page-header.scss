@@ -133,9 +133,6 @@
   ul {
     margin-top: $space-y-sm;
     margin-bottom: $space-y-sm;
-    overflow-x: scroll;
-    display: flex;
-    justify-content: flex-start;
     list-style-type: none;
   }
   &__item + &__item {
