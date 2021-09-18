@@ -3,8 +3,11 @@
   --live-all-header-stuffs-height: "";
 }
 
-.page-content {
-  padding-top: var(--live-all-header-stuffs-height, var(--header-bar-height));
+// .page-content {
+//   padding-top: var(--live-all-header-stuffs-height, var(--header-bar-height));
+// }
+.topmost-element {
+  margin-top: var(--live-all-header-stuffs-height, var(--header-bar-height));
 }
 
 .header-icon {
@@ -13,7 +16,6 @@
 }
 
 .page-header {
-  z-index: $z-index-header-bar;
   position: fixed;
   top: 0;
   left: 0;

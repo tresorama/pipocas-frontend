@@ -44,7 +44,6 @@
   // PANEL STYLE
   @media (max-width: 767px) {
     &__panel {
-      z-index: $z-index-panels;
       position: fixed;
       top: 0;
       left: 0;

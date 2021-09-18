@@ -1,5 +1,7 @@
 .product {
-  margin-top: $space-y-sm;
+  &__wrapper {
+    padding-top: $space-y-sm;
+  }
 
   &__images {
     .carousel {
@@ -97,10 +99,7 @@
     // border-top: 1px solid $c-grey;
 
     > *:first-child {
-      margin-top: var(
-        --live-all-header-stuffs-height,
-        var(--header-bar-height)
-      );
+      margin-top: var(--live-all-header-stuffs-height, var(--header-bar-height));
     }
   }
 }

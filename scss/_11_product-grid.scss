@@ -6,8 +6,10 @@
   .product-image {
     flex-grow: 1;
     border-radius: $border-radius;
+    position: relative;
 
     img {
+      position: absolute;
       object-fit: cover;
       width: 100%;
       height: 100%;
@@ -15,7 +17,7 @@
 
     img:nth-child(2) {
       opacity: 0;
-      transition: opacity 0.1s ease;
+      transition: opacity 100ms ease-out;
     }
 
     &:hover img:nth-child(2) {
@@ -47,7 +49,7 @@
 
   @supports (aspect-ratio: 1/1) {
     .product-image {
-      aspect-ratio: $asp-ratio;
+      aspect-ratio: #{$asp-ratio};
     }
   }
 
@@ -67,14 +69,17 @@
 }
 
 /* =================================================== 
+      GRID VIEW -> VARIABLES
+=================================================== */
+$gap: $space-x-sm;
+/* =================================================== 
       GRID-VIEW => PATTERN 1
 =================================================== */
 .grid-pattern-1 .product-grid {
-  --gap: #{$space-x-md};
   &__list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--gap);
+    gap: $gap;
   }
 
   @media (min-width: 768px) {
@@ -88,16 +93,14 @@
     }
   }
 }
-
 /* =================================================== 
       GRID-VIEW => PATTERN 2
 =================================================== */
 .grid-pattern-2 .product-grid {
-  --gap: #{$space-x-md};
   &__list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--gap);
+    gap: $gap;
   }
   @media (min-width: 768px) {
     &__list {
@@ -113,11 +116,10 @@
       GRID-VIEW => PATTERN 3
 =================================================== */
 .grid-pattern-3 .product-grid {
-  --gap: #{$space-x-md};
   &__list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--gap);
+    gap: $gap;
   }
   @media (min-width: 768px) {
     &__list {
@@ -131,5 +133,7 @@
 =================================================== */
 
 [class*="grid-pattern"].grid-no-gap .product-grid {
-  --gap: 0px;
+  &__list {
+    gap: 0px;
+  }
 }

@@ -155,7 +155,7 @@ window._UI = {};
   (function () {
     const desktopMediaQuery = "(min-width: 768px)";
     const className = "is-large-view";
-    const getEl = () => document.querySelector(".page-content .product");
+    const getEl = () => document.querySelector(".product");
 
     mediaQueryWatcher(desktopMediaQuery, (matches) => {
       if (matches) {
