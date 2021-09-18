@@ -45,13 +45,13 @@
 .grid-image-has-fixed-aspect-ratio .product-grid {
   $asp-ratio: "3 / 4.25";
 
-  @supports not (aspect-ratio: 1/1) {
+  @supports (aspect-ratio: 1/1) {
     .product-image {
       aspect-ratio: $asp-ratio;
     }
   }
 
-  @supports (aspect-ratio: 1/1) {
+  @supports not (aspect-ratio: 1/1) {
     .product-image {
       padding-bottom: calc(100% * (1 / (#{$asp-ratio})));
       position: relative;
