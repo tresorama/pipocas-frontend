@@ -92,9 +92,21 @@ export function mediaQueryWatcher(mediaQueryString, onMatchChange) {
   const mql = window.matchMedia(mediaQueryString);
 
   // when media query match status change run callback
-  mql.addEventListener("change", function (e) {
+  const handler = function (e) {
     onMatchChange(e.matches);
-  });
+  };
+
+  if (mql.addEventListener !== undefined) {
+    mql.addEventListener("change", handler);
+  } else if (mql.addListner !== undefined) {
+    console.log(
+      `mediaQueryList.addEventListener() not supported.
+      Fallbacking to addListener()! `
+    );
+    mql.addListener("change", handler);
+  } else {
+    console.log("mediaQueryList.addEventListener() & mediaQueryList.addListener() not supported! ");
+  }
 
   // run once at page load
   onMatchChange(mql.matches);
