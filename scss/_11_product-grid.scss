@@ -1,14 +1,43 @@
 .product-grid {
+  &__item {
+    display: flex;
+    flex-direction: column;
+  }
+  .product-image {
+    flex-grow: 1;
+    aspect-ratio: 3/4;
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .product-details {
+    margin-top: auto;
+    flex-basis: 100px;
+    flex-shrink: 0;
+    border: 1px solid;
+  }
+
+  .product-name {
+    margin-top: $space-y-sm;
+    @include text-body;
+  }
+  .product-price {
+    margin-top: $space-y-0;
+    @include text-body;
+  }
 }
 
 /* =================================================== 
       PATTERN 1
 =================================================== */
-.pattern-1 .product-grid {
+.grid-pattern-1 .product-grid {
   --gap: #{$space-x-md};
   &__list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--gap);
   }
 
   @media (min-width: 768px) {
@@ -26,7 +55,7 @@
 /* =================================================== 
       PATTERN 2
 =================================================== */
-.pattern-2 .product-grid {
+.grid-pattern-2 .product-grid {
   --gap: #{$space-x-md};
   &__list {
     display: grid;
@@ -40,6 +69,22 @@
     &__item:nth-child(9n + 3) {
       grid-column: auto / span 2;
       grid-row: auto / span 2;
+    }
+  }
+}
+/* =================================================== 
+      PATTERN 3
+=================================================== */
+.grid-pattern-3 .product-grid {
+  --gap: #{$space-x-md};
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--gap);
+  }
+  @media (min-width: 768px) {
+    &__list {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 }

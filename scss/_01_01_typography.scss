@@ -30,6 +30,12 @@ $font-fam-display: "Montserrat";
   font-weight: 300;
   font-family: $font-fam-body;
 }
+@mixin text-label {
+  font-size: 1rem;
+  line-height: 1.29;
+  font-weight: 500;
+  font-family: $font-fam-body;
+}
 @mixin text-button {
   font-size: 1rem;
   line-height: 1.29;

@@ -16,8 +16,17 @@
     "gh-pages": "^3.2.3",
     "node-sass": "^6.0.1",
     "parcel-bundler": "^1.12.5",
+    "parcel-plugin-static-files-copy": "^2.6.0",
     "sass": "^1.39.0"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Jacopo Marrone",
+  "license": "ISC",
+  "staticFiles": {
+    "staticPath": [
+      {
+        "staticPath": "assets",
+        "staticOutDir": "assets/"
+      }
+    ]
+  }
 }

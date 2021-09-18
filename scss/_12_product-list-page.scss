@@ -1,41 +1,12 @@
+.page-title {
+  padding-top: $space-y-md;
+  padding-bottom: $space-y-md;
+  @include text-body;
+}
+
 .filter-bar {
-  .container {
-    display: flex;
-    @media (max-width: 767px) {
-      overflow-x: auto;
-    }
-  }
-  ul {
-    list-style: none;
-  }
-  &__item {
-    flex-grow: 1;
-    position: relative;
-    border: 1px solid;
-  }
+}
 
-  // PANEL STYLE
-  &__panel {
-    background-color: pink;
-    @media (max-width: 767px) {
-      z-index: $z-index-panels;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      &-closer {
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin: 2vw;
-      }
-    }
-
-    @media (min-width: 768px) {
-      position: absolute;
-      top: 100%;
-      left: 0;
-    }
-  }
+.product-grid {
+  margin-top: $space-y-md;
 }

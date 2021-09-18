@@ -1,26 +1,14 @@
 import {
   throttle,
   ObserverScroll,
-  duplicateElement,
   mediaQueryWatcher,
-  fakeUseState,
   fakeUseRef,
+  fakeUseState,
 } from "./frontend-utilities.js";
+import runDevoperTimeSaver from "./devTimeSaver.js";
 // import ViewportDetailsBanner from "./ViewportDetailsBanner.js";
 //ViewportDetailsBanner();
-
-/* =================================================== 
-      DEVELOPEMTN ONLY
-=================================================== */
-(function () {
-  const styleSheet = document.createElement("style");
-  styleSheet.innerHTML = `
-    .taxonomy-navigation {
-      display: none;
-    }
-  `;
-  document.head.appendChild(styleSheet);
-})();
+runDevoperTimeSaver();
 
 /* =================================================== 
   Initialize Global Object That Contains all UI animation
@@ -199,13 +187,13 @@ window._UI = {};
 (function (iMustRun) {
   if (!iMustRun) return;
 
-  // duplicate product list item some times for development ...
-  (function () {
-    duplicateElement({
-      selector: ".product-grid__item",
-      times: 16,
-    });
-  })();
+  // // duplicate product list item some times for development ...
+  // (function () {
+  //   duplicateElement({
+  //     selector: ".product-grid__item",
+  //     times: 16,
+  //   });
+  // })();
 
   // filter bar panels open/close => TOGGLE CLASS VERSION
   // need also this file:
@@ -290,7 +278,6 @@ window._UI = {};
     // - rebuild timeline on screen size change
     // - expose methods for open/close panel
     function PanelOpener(panel) {
-      // const [getTimeline, setTimeline] = fakeUseState(null);
       const [getTimeline, setTimeline] = fakeUseRef();
 
       mediaQueryWatcher(desktopMediaQuery, (matches) => {
@@ -344,5 +331,51 @@ window._UI = {};
 
     // save in global _UI object
     window._UI.filterBarPanels = all;
+  })();
+
+  // filter bar panels grid-visualization chooser
+  (function () {
+    return;
+    const select = document.querySelector(".product-grid-visualization-chooser");
+    if (!select) return;
+    const options = [...select.querySelectorAll(".option")];
+    const allClassNames = options.map((option) => option.getAttribute("data-js-option-classname"));
+
+    options.forEach((option) => {
+      option.addEventListener("click", function () {
+        const thisClassName = this.getAttribute("data-js-option-classname");
+        const alreadyActive = document.body.classList.contains(thisClassName);
+        if (alreadyActive) return;
+        allClassNames.forEach((c) => document.body.classList.remove(c));
+        document.body.classList.add(thisClassName);
+      });
+    });
+
+    document.body.classList.add(allClassNames[0]); // on page load choose first one option
+  })();
+
+  // filter bar panels grid-visualization chooser
+  (function () {
+    const select = document.querySelector(".product-grid-visualization-chooser");
+    if (!select) return;
+    const options = [...select.querySelectorAll(".option")];
+    const allClassNames = options.map((option) => option.getAttribute("data-js-option-classname"));
+    const [getCurrent, setCurrent, onUpdateCurrent] = fakeUseState(0);
+
+    const updateView = () => {
+      const current = getCurrent();
+      allClassNames.forEach((c) => document.body.classList.remove(c));
+      document.body.classList.add(allClassNames[current]);
+    };
+
+    options.forEach((option) => {
+      option.addEventListener("click", function () {
+        const thisOptionIndex = options.indexOf(this);
+        setCurrent(thisOptionIndex);
+      });
+    });
+
+    onUpdateCurrent.subscribe(updateView);
+    updateView(); // on page load choose first one option
   })();
 })(document.body.classList.contains("PRODUCT-LIST-PAGE"));

@@ -100,20 +100,6 @@ export function mediaQueryWatcher(mediaQueryString, onMatchChange) {
   onMatchChange(mql.matches);
 }
 
-export function fakeUseState(initialState) {
-  let state = initialState;
-  const setState = (newState) => {
-    return new Promise((resolve, reject) => {
-      // update state
-      state = newState;
-      // resolve so subscribed tasks can be exexcuted
-      resolve(state);
-    });
-  };
-  const getState = () => state;
-  return [getState, setState];
-}
-
 export function fakeUseRef(intialValue) {
   let ref = {
     current: intialValue || null,
@@ -126,6 +112,33 @@ export function fakeUseRef(intialValue) {
   return [getRef, updateRef];
 }
 
-export function removeCSSInlineStyle(el) {
-  el.removeAttribute("style");
+/* =================================================== 
+      IN PROGRESS
+=================================================== */
+export function GenericObserver() {
+  return {
+    actions: [],
+    fire() {
+      this.actions.forEach((action) => action());
+    },
+    subscribe(action) {
+      this.actions.push(action);
+    },
+    unsubscribe(action) {
+      const index = this.actions.indexOf(action);
+      if (index === -1) return; // not found
+      this.actions = this.actions.splice(index, 1);
+    },
+  };
+}
+
+export function fakeUseState(initialState) {
+  let state = initialState;
+  const getState = () => state;
+  const setState = (newState) => {
+    state = newState;
+    onUpdateState.fire();
+  };
+  const onUpdateState = new GenericObserver();
+  return [getState, setState, onUpdateState];
 }
