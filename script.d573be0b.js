@@ -565,7 +565,7 @@ window._UI = {};
     var className = "is-large-view";
 
     var getEl = function getEl() {
-      return document.querySelector(".page-content .product");
+      return document.querySelector(".product");
     };
 
     (0, _frontendUtilities.mediaQueryWatcher)(desktopMediaQuery, function (matches) {
@@ -825,7 +825,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64785" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59906" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
