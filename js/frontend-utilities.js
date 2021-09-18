@@ -98,14 +98,16 @@ export function mediaQueryWatcher(mediaQueryString, onMatchChange) {
 
   if (mql.addEventListener !== undefined) {
     mql.addEventListener("change", handler);
-  } else if (mql.addListner !== undefined) {
+  } else if (mql.addListener !== undefined) {
     console.log(
       `mediaQueryList.addEventListener() not supported.
       Fallbacking to addListener()! `
     );
-    mql.addListener("change", handler);
+    mql.addListener(handler);
   } else {
-    console.log("mediaQueryList.addEventListener() & mediaQueryList.addListener() not supported! ");
+    console.log(
+      "Neither mediaQueryList.addEventListener() & mediaQueryList.addListener() are supported by this browser! "
+    );
   }
 
   // run once at page load
@@ -127,7 +129,7 @@ export function fakeUseRef(intialValue) {
 /* =================================================== 
       IN PROGRESS
 =================================================== */
-export function GenericObserver() {
+export function GenericEmitter() {
   return {
     actions: [],
     fire() {
@@ -151,6 +153,6 @@ export function fakeUseState(initialState) {
     state = newState;
     onUpdateState.fire();
   };
-  const onUpdateState = new GenericObserver();
+  const onUpdateState = new GenericEmitter();
   return [getState, setState, onUpdateState];
 }

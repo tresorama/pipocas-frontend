@@ -5,8 +5,26 @@
 }
 
 .filter-bar {
+  &__item {
+    flex-grow: 0;
+    min-width: 20vw;
+  }
+  &__item + &__item {
+    margin-left: $space-x-sm;
+  }
+  &__item:last-child {
+    margin-left: auto;
+  }
+  &__item:last-child .filter-bar__panel {
+    right: 0;
+  }
 }
 
 .product-grid {
   margin-top: $space-y-md;
+}
+
+.grid-image-has-fixed-aspect-ratio .filter-bar {
+  position: relative; // to put under filter bar
+  z-index: 1; // to put under filter barr
 }

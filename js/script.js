@@ -1,10 +1,4 @@
-import {
-  throttle,
-  ObserverScroll,
-  mediaQueryWatcher,
-  fakeUseRef,
-  fakeUseState,
-} from "./frontend-utilities.js";
+import { throttle, ObserverScroll, mediaQueryWatcher, fakeUseRef, fakeUseState } from "./frontend-utilities.js";
 import runDevoperTimeSaver from "./devTimeSaver.js";
 // import ViewportDetailsBanner from "./ViewportDetailsBanner.js";
 //ViewportDetailsBanner();
@@ -69,10 +63,8 @@ window._UI = {};
         });
       },
       getHeight() {
-        const headerBarHeight =
-          document.querySelector(headerBarSelector).getBoundingClientRect().height || 0;
-        const taxonomyNavigationHeight =
-          document.querySelector(taxonomyNavigationSelector).getBoundingClientRect().height || 0;
+        const headerBarHeight = document.querySelector(headerBarSelector).getBoundingClientRect().height || 0;
+        const taxonomyNavigationHeight = document.querySelector(taxonomyNavigationSelector).getBoundingClientRect().height || 0;
         return headerBarHeight + taxonomyNavigationHeight;
       },
       setHeightCustomProperty() {
@@ -83,11 +75,9 @@ window._UI = {};
   })();
 
   // EVENT LISTENER -> hamburger
-  document
-    .querySelector("[data-js=header-navigation-mobile-trigger]")
-    .addEventListener("click", function () {
-      window._UI.headerNavigation.toggle();
-    });
+  document.querySelector("[data-js=header-navigation-mobile-trigger]").addEventListener("click", function () {
+    window._UI.headerNavigation.toggle();
+  });
 
   // EVENT LISTENER -> header-navigation auto show/hide
   new ObserverScroll({
@@ -131,17 +121,15 @@ window._UI = {};
       window.scrollTo({ x: 0, y: scrollPos });
     };
 
-    document
-      .querySelector("[data-js=header-navigation-mobile-trigger]")
-      .addEventListener("click", function () {
-        if (window._UI.headerNavigation.isOpen) {
-          document.body.style.overflow = "hidden";
-          saveScrollPosition();
-        } else {
-          document.body.style.overflow = null;
-          restoreScrollPosition();
-        }
-      });
+    document.querySelector("[data-js=header-navigation-mobile-trigger]").addEventListener("click", function () {
+      if (window._UI.headerNavigation.isOpen) {
+        document.body.style.overflow = "hidden";
+        saveScrollPosition();
+      } else {
+        document.body.style.overflow = null;
+        restoreScrollPosition();
+      }
+    });
   })();
 
   // ADDITIONAL UI STUFF -> CSS Custom Prop Value Update -> Header Height
@@ -186,14 +174,6 @@ window._UI = {};
 =================================================== */
 (function (iMustRun) {
   if (!iMustRun) return;
-
-  // // duplicate product list item some times for development ...
-  // (function () {
-  //   duplicateElement({
-  //     selector: ".product-grid__item",
-  //     times: 16,
-  //   });
-  // })();
 
   // filter bar panels open/close => TOGGLE CLASS VERSION
   // need also this file:
@@ -254,15 +234,9 @@ window._UI = {};
       const options = { paused: true, defaults: { duration: 0.2 } };
 
       if (isMobile) {
-        return gsap
-          .timeline(options)
-          .from(panelEl, { yPercent: -100 })
-          .from(panelEl.children, { opacity: 0 });
+        return gsap.timeline(options).from(panelEl, { yPercent: -100 }).from(panelEl.children, { opacity: 0 });
       } else {
-        return gsap
-          .timeline(options)
-          .from(panelEl, { scaleY: 0 })
-          .from(panelEl.children, { opacity: 0 });
+        return gsap.timeline(options).from(panelEl, { scaleY: 0 }).from(panelEl.children, { opacity: 0 });
       }
     };
 
@@ -335,37 +309,29 @@ window._UI = {};
 
   // filter bar panels grid-visualization chooser
   (function () {
-    return;
     const select = document.querySelector(".product-grid-visualization-chooser");
     if (!select) return;
     const options = [...select.querySelectorAll(".option")];
-    const allClassNames = options.map((option) => option.getAttribute("data-js-option-classname"));
-
-    options.forEach((option) => {
-      option.addEventListener("click", function () {
-        const thisClassName = this.getAttribute("data-js-option-classname");
-        const alreadyActive = document.body.classList.contains(thisClassName);
-        if (alreadyActive) return;
-        allClassNames.forEach((c) => document.body.classList.remove(c));
-        document.body.classList.add(thisClassName);
-      });
-    });
-
-    document.body.classList.add(allClassNames[0]); // on page load choose first one option
-  })();
-
-  // filter bar panels grid-visualization chooser
-  (function () {
-    const select = document.querySelector(".product-grid-visualization-chooser");
-    if (!select) return;
-    const options = [...select.querySelectorAll(".option")];
-    const allClassNames = options.map((option) => option.getAttribute("data-js-option-classname"));
+    const allOptionsClassSet = options.map((option) => option.getAttribute("data-js-option-classname"));
     const [getCurrent, setCurrent, onUpdateCurrent] = fakeUseState(0);
 
+    const addOptionClassSet = (classesString) => {
+      classesString.split(",").forEach((_class) => {
+        document.body.classList.add(_class);
+      });
+    };
+    const removeOptionClassSet = (classesString) => {
+      classesString.split(",").forEach((_class) => {
+        document.body.classList.remove(_class);
+      });
+    };
+
     const updateView = () => {
-      const current = getCurrent();
-      allClassNames.forEach((c) => document.body.classList.remove(c));
-      document.body.classList.add(allClassNames[current]);
+      //remove all options classes ...
+      allOptionsClassSet.forEach(removeOptionClassSet);
+
+      // add only current option classes ...
+      addOptionClassSet(allOptionsClassSet[getCurrent()]);
     };
 
     options.forEach((option) => {

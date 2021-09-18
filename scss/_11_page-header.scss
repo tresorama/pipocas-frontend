@@ -95,7 +95,7 @@
     margin-top: $space-y-sm;
   }
   &__item {
-    @include text-heading-section;
+    @include text-header-navgation-item;
   }
 }
 

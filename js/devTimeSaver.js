@@ -25,7 +25,6 @@ export default function () {
           let clampedIndex = (index + 2) % 6;
           clampedIndex++;
           el.querySelectorAll("img").forEach((img, i) => {
-            debugger;
             const newSrc = `assets/images/products/${clampedIndex}/${i + 1}.jpg`;
             img.src = newSrc;
           });

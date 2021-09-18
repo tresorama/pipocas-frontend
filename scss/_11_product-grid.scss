@@ -5,32 +5,69 @@
   }
   .product-image {
     flex-grow: 1;
-    aspect-ratio: 3/4;
+    border-radius: $border-radius;
+
     img {
       object-fit: cover;
       width: 100%;
       height: 100%;
     }
+
+    img:nth-child(2) {
+      opacity: 0;
+      transition: opacity 0.1s ease;
+    }
+
+    &:hover img:nth-child(2) {
+      opacity: 1;
+    }
   }
   .product-details {
-    margin-top: auto;
-    flex-basis: 100px;
     flex-shrink: 0;
-    border: 1px solid;
+    min-height: 60px;
   }
 
   .product-name {
-    margin-top: $space-y-sm;
-    @include text-body;
+    margin-top: $space-y-xs;
+    @include text-product-grid-item-name;
   }
   .product-price {
     margin-top: $space-y-0;
-    @include text-body;
+    @include text-product-grid-item-price;
+    opacity: 0.6;
   }
 }
 
 /* =================================================== 
-      PATTERN 1
+      PRODUCT-IMAGE HAS FIXED ASPECT RATIO VARIATION
+      active/disactive this option by adding or removing the class to body
+=================================================== */
+.grid-image-has-fixed-aspect-ratio .product-grid {
+  $asp-ratio: "3 / 4.25";
+
+  @supports not (aspect-ratio: 1/1) {
+    .product-image {
+      aspect-ratio: $asp-ratio;
+    }
+  }
+
+  @supports (aspect-ratio: 1/1) {
+    .product-image {
+      padding-bottom: calc(100% * (1 / (#{$asp-ratio})));
+      position: relative;
+      overflow: hidden;
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-position: 50% 50%;
+      }
+    }
+  }
+}
+
+/* =================================================== 
+      GRID-VIEW => PATTERN 1
 =================================================== */
 .grid-pattern-1 .product-grid {
   --gap: #{$space-x-md};
@@ -53,7 +90,7 @@
 }
 
 /* =================================================== 
-      PATTERN 2
+      GRID-VIEW => PATTERN 2
 =================================================== */
 .grid-pattern-2 .product-grid {
   --gap: #{$space-x-md};
@@ -73,7 +110,7 @@
   }
 }
 /* =================================================== 
-      PATTERN 3
+      GRID-VIEW => PATTERN 3
 =================================================== */
 .grid-pattern-3 .product-grid {
   --gap: #{$space-x-md};
@@ -87,4 +124,12 @@
       grid-template-columns: repeat(3, 1fr);
     }
   }
+}
+
+/* =================================================== 
+      GRID-VIEW => No Gap
+=================================================== */
+
+[class*="grid-pattern"].grid-no-gap .product-grid {
+  --gap: 0px;
 }
