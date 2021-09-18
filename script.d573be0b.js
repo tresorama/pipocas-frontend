@@ -128,9 +128,9 @@ exports.debounce = debounce;
 exports.ObserverScroll = ObserverScroll;
 exports.duplicateElement = duplicateElement;
 exports.mediaQueryWatcher = mediaQueryWatcher;
-exports.fakeUseState = fakeUseState;
 exports.fakeUseRef = fakeUseRef;
-exports.removeCSSInlineStyle = removeCSSInlineStyle;
+exports.GenericObserver = GenericObserver;
+exports.fakeUseState = fakeUseState;
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -243,25 +243,6 @@ function mediaQueryWatcher(mediaQueryString, onMatchChange) {
   onMatchChange(mql.matches);
 }
 
-function fakeUseState(initialState) {
-  var state = initialState;
-
-  var setState = function setState(newState) {
-    return new Promise(function (resolve, reject) {
-      // update state
-      state = newState; // resolve so subscribed tasks can be exexcuted
-
-      resolve(state);
-    });
-  };
-
-  var getState = function getState() {
-    return state;
-  };
-
-  return [getState, setState];
-}
-
 function fakeUseRef(intialValue) {
   var ref = {
     current: intialValue || null
@@ -277,14 +258,101 @@ function fakeUseRef(intialValue) {
 
   return [getRef, updateRef];
 }
+/* =================================================== 
+      IN PROGRESS
+=================================================== */
 
-function removeCSSInlineStyle(el) {
-  el.removeAttribute("style");
+
+function GenericObserver() {
+  return {
+    actions: [],
+    fire: function fire() {
+      this.actions.forEach(function (action) {
+        return action();
+      });
+    },
+    subscribe: function subscribe(action) {
+      this.actions.push(action);
+    },
+    unsubscribe: function unsubscribe(action) {
+      var index = this.actions.indexOf(action);
+      if (index === -1) return; // not found
+
+      this.actions = this.actions.splice(index, 1);
+    }
+  };
 }
-},{}],"js/script.js":[function(require,module,exports) {
+
+function fakeUseState(initialState) {
+  var state = initialState;
+
+  var getState = function getState() {
+    return state;
+  };
+
+  var setState = function setState(newState) {
+    state = newState;
+    onUpdateState.fire();
+  };
+
+  var onUpdateState = new GenericObserver();
+  return [getState, setState, onUpdateState];
+}
+},{}],"js/devTimeSaver.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _frontendUtilities = require("./frontend-utilities");
+
+function _default() {
+  // hide taxonomy-navigation
+  (function () {
+    var styleSheet = document.createElement("style");
+    styleSheet.innerHTML = "\n    .taxonomy-navigation {\n      display: none;\n    }\n  ";
+    document.head.appendChild(styleSheet);
+  })(); // product-list page only
+
+
+  (function (iMustRun) {
+    if (!iMustRun) return; // duplicate product list item some times for development ...
+
+    (function () {
+      (0, _frontendUtilities.duplicateElement)({
+        selector: ".product-grid__item",
+        times: 16,
+        elementModifierCallback: function elementModifierCallback(el, index) {
+          var clampedIndex = (index + 2) % 6;
+          clampedIndex++;
+          el.querySelectorAll("img").forEach(function (img, i) {
+            debugger;
+            var newSrc = "assets/images/products/".concat(clampedIndex, "/").concat(i + 1, ".jpg");
+            img.src = newSrc;
+          });
+        }
+      });
+    })();
+  })(document.body.classList.contains("PRODUCT-LIST-PAGE"));
+}
+},{"./frontend-utilities":"js/frontend-utilities.js"}],"js/script.js":[function(require,module,exports) {
 "use strict";
 
 var _frontendUtilities = require("./frontend-utilities.js");
+
+var _devTimeSaver = _interopRequireDefault(require("./devTimeSaver.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -300,19 +368,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 // import ViewportDetailsBanner from "./ViewportDetailsBanner.js";
 //ViewportDetailsBanner();
-
-/* =================================================== 
-      DEVELOPEMTN ONLY
-=================================================== */
-(function () {
-  var styleSheet = document.createElement("style");
-  styleSheet.innerHTML = "\n    .taxonomy-navigation {\n      display: none;\n    }\n  ";
-  document.head.appendChild(styleSheet);
-})();
+(0, _devTimeSaver.default)();
 /* =================================================== 
   Initialize Global Object That Contains all UI animation
 =================================================== */
-
 
 window._UI = {};
 /* =================================================== 
@@ -517,17 +576,16 @@ window._UI = {};
 
 
 (function (iMustRun) {
-  if (!iMustRun) return; // duplicate product list item some times for development ...
-
-  (function () {
-    (0, _frontendUtilities.duplicateElement)({
-      selector: ".product-grid__item",
-      times: 16
-    });
-  })(); // filter bar panels open/close => TOGGLE CLASS VERSION
+  if (!iMustRun) return; // // duplicate product list item some times for development ...
+  // (function () {
+  //   duplicateElement({
+  //     selector: ".product-grid__item",
+  //     times: 16,
+  //   });
+  // })();
+  // filter bar panels open/close => TOGGLE CLASS VERSION
   // need also this file:
   // scss/_12_product-list-page__filter-bar-panel-with-css-transition.scss
-
 
   (function () {
     if (document.body.classList.contains("FILTER-BAR-PANEL__USE-GSAP")) return;
@@ -633,7 +691,6 @@ window._UI = {};
     // - expose methods for open/close panel
 
     function PanelOpener(panel) {
-      // const [getTimeline, setTimeline] = fakeUseState(null);
       var _fakeUseRef = (0, _frontendUtilities.fakeUseRef)(),
           _fakeUseRef2 = _slicedToArray(_fakeUseRef, 2),
           getTimeline = _fakeUseRef2[0],
@@ -690,9 +747,69 @@ window._UI = {};
     }); // save in global _UI object
 
     window._UI.filterBarPanels = all;
+  })(); // filter bar panels grid-visualization chooser
+
+
+  (function () {
+    return;
+    var select = document.querySelector(".product-grid-visualization-chooser");
+    if (!select) return;
+
+    var options = _toConsumableArray(select.querySelectorAll(".option"));
+
+    var allClassNames = options.map(function (option) {
+      return option.getAttribute("data-js-option-classname");
+    });
+    options.forEach(function (option) {
+      option.addEventListener("click", function () {
+        var thisClassName = this.getAttribute("data-js-option-classname");
+        var alreadyActive = document.body.classList.contains(thisClassName);
+        if (alreadyActive) return;
+        allClassNames.forEach(function (c) {
+          return document.body.classList.remove(c);
+        });
+        document.body.classList.add(thisClassName);
+      });
+    });
+    document.body.classList.add(allClassNames[0]); // on page load choose first one option
+  })(); // filter bar panels grid-visualization chooser
+
+
+  (function () {
+    var select = document.querySelector(".product-grid-visualization-chooser");
+    if (!select) return;
+
+    var options = _toConsumableArray(select.querySelectorAll(".option"));
+
+    var allClassNames = options.map(function (option) {
+      return option.getAttribute("data-js-option-classname");
+    });
+
+    var _fakeUseState = (0, _frontendUtilities.fakeUseState)(0),
+        _fakeUseState2 = _slicedToArray(_fakeUseState, 3),
+        getCurrent = _fakeUseState2[0],
+        setCurrent = _fakeUseState2[1],
+        onUpdateCurrent = _fakeUseState2[2];
+
+    var updateView = function updateView() {
+      var current = getCurrent();
+      allClassNames.forEach(function (c) {
+        return document.body.classList.remove(c);
+      });
+      document.body.classList.add(allClassNames[current]);
+    };
+
+    options.forEach(function (option) {
+      option.addEventListener("click", function () {
+        var thisOptionIndex = options.indexOf(this);
+        setCurrent(thisOptionIndex);
+      });
+    });
+    onUpdateCurrent.subscribe(updateView);
+    updateView(); // on page load choose first one option
   })();
 })(document.body.classList.contains("PRODUCT-LIST-PAGE"));
-},{"./frontend-utilities.js":"js/frontend-utilities.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./frontend-utilities.js":"js/frontend-utilities.js","./devTimeSaver.js":"js/devTimeSaver.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -720,7 +837,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62615" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56698" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
