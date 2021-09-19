@@ -451,13 +451,20 @@ a {
 /* =================================================== 
       GRID VIEW -> VARIABLES
 =================================================== */
+[class*="grid-pattern"] .product-grid {
+  --gap: 1.6vmin; }
+  [class*="grid-pattern"] .product-grid__list {
+    gap: var(--gap); }
+
+[class*="grid-pattern"].grid-no-gap .product-grid {
+  --gap: 0px; }
+
 /* =================================================== 
       GRID-VIEW => PATTERN 1
 =================================================== */
 .grid-pattern-1 .product-grid__list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.6vmin; }
+  grid-template-columns: repeat(2, 1fr); }
 
 @media (min-width: 768px) {
   .grid-pattern-1 .product-grid__list {
@@ -472,8 +479,7 @@ a {
 =================================================== */
 .grid-pattern-2 .product-grid__list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.6vmin; }
+  grid-template-columns: repeat(2, 1fr); }
 
 @media (min-width: 768px) {
   .grid-pattern-2 .product-grid__list {
@@ -487,18 +493,11 @@ a {
 =================================================== */
 .grid-pattern-3 .product-grid__list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.6vmin; }
+  grid-template-columns: repeat(2, 1fr); }
 
 @media (min-width: 768px) {
   .grid-pattern-3 .product-grid__list {
     grid-template-columns: repeat(3, 1fr); } }
-
-/* =================================================== 
-      GRID-VIEW => No Gap
-=================================================== */
-[class*="grid-pattern"].grid-no-gap .product-grid__list {
-  gap: 0px; }
 
 .page-header {
   z-index: 10; }
