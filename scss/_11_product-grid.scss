@@ -71,7 +71,20 @@
 /* =================================================== 
       GRID VIEW -> VARIABLES
 =================================================== */
-$gap: $space-x-sm;
+.product-grid {
+  &__list {
+    row-gap: $space-x-sm;
+    column-gap: $space-x-sm;
+  }
+}
+
+.grid-no-gap .product-grid {
+  &__list {
+    row-gap: $space-x-0;
+    column-gap: $space-x-0;
+  }
+}
+
 /* =================================================== 
       GRID-VIEW => PATTERN 1
 =================================================== */
@@ -79,7 +92,6 @@ $gap: $space-x-sm;
   &__list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: $gap;
   }
 
   @media (min-width: 768px) {
@@ -100,7 +112,6 @@ $gap: $space-x-sm;
   &__list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: $gap;
   }
   @media (min-width: 768px) {
     &__list {
@@ -119,21 +130,10 @@ $gap: $space-x-sm;
   &__list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: $gap;
   }
   @media (min-width: 768px) {
     &__list {
       grid-template-columns: repeat(3, 1fr);
     }
-  }
-}
-
-/* =================================================== 
-      GRID-VIEW => No Gap
-=================================================== */
-
-[class*="grid-pattern"].grid-no-gap .product-grid {
-  &__list {
-    gap: 0px;
   }
 }

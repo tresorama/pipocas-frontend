@@ -7,8 +7,9 @@
     "start": "parcel ./index.html --open",
     "start:single-product": "parcel ./single-product.html --open",
     "start:product-list": "parcel ./product-list.html --open",
-    "build": "parcel build ./index.html",
-    "build:gh-pages": "parcel build ./index.html --public-url \"https://tresorama.github.io/pipocas-frontend/\"",
+    "build:clean": "rm -r ./dist",
+    "build": "npm run build:clean ; parcel build ./index.html",
+    "build:gh-pages": "npm run build:clean ; parcel build ./index.html --public-url \"https://tresorama.github.io/pipocas-frontend/\"",
     "predeploy": "npm run build:gh-pages",
     "deploy": "gh-pages -d dist"
   },

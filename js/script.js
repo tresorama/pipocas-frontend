@@ -1,4 +1,4 @@
-import { throttle, ObserverScroll, mediaQueryWatcher, fakeUseRef, fakeUseState } from "./frontend-utilities.js";
+import { throttle, ObserverScroll, mediaQueryWatcher, fakeUseRef, fakeUseState, forceReflow } from "./frontend-utilities.js";
 import runDevoperTimeSaver from "./devTimeSaver.js";
 // import ViewportDetailsBanner from "./ViewportDetailsBanner.js";
 //ViewportDetailsBanner();
@@ -332,6 +332,13 @@ window._UI = {};
 
       // add only current option classes ...
       addOptionClassSet(allOptionsClassSet[getCurrent()]);
+
+      //bugfix - force a reflow + repaint to ensure css grid gap updates is reflected in the view
+      setTimeout(() => {
+        forceReflow({
+          el: document.querySelector(".product-grid__list"),
+        });
+      }, 1);
     };
 
     options.forEach((option) => {
@@ -342,6 +349,6 @@ window._UI = {};
     });
 
     onUpdateCurrent.subscribe(updateView);
-    updateView(); // on page load choose first one option
+    updateView();
   })();
 })(document.body.classList.contains("PRODUCT-LIST-PAGE"));

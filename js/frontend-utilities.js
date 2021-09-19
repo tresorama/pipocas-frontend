@@ -105,9 +105,7 @@ export function mediaQueryWatcher(mediaQueryString, onMatchChange) {
     );
     mql.addListener(handler);
   } else {
-    console.log(
-      "Neither mediaQueryList.addEventListener() & mediaQueryList.addListener() are supported by this browser! "
-    );
+    console.log("Neither mediaQueryList.addEventListener() & mediaQueryList.addListener() are supported by this browser! ");
   }
 
   // run once at page load
@@ -115,20 +113,12 @@ export function mediaQueryWatcher(mediaQueryString, onMatchChange) {
 }
 
 export function fakeUseRef(intialValue) {
-  let ref = {
-    current: intialValue || null,
-  };
+  let ref = { current: intialValue || null };
   const getRef = () => ref.current;
-  const updateRef = (newValue) => {
-    ref.current = newValue;
-  };
-
+  const updateRef = (newValue) => (ref.current = newValue);
   return [getRef, updateRef];
 }
 
-/* =================================================== 
-      IN PROGRESS
-=================================================== */
 export function GenericEmitter() {
   return {
     actions: [],
@@ -155,4 +145,17 @@ export function fakeUseState(initialState) {
   };
   const onUpdateState = new GenericEmitter();
   return [getState, setState, onUpdateState];
+}
+
+export function forceReflow({ el = document.body, position = "afterbegin" }) {
+  const string = `
+<div class="force-reflow">
+  <p>Force reflow</p>
+</div>
+  `;
+  el.insertAdjacentHTML(position, string);
+  setTimeout(() => {
+    const node = document.querySelector(".force-reflow");
+    node.parentElement.removeChild(node);
+  }, 1);
 }
