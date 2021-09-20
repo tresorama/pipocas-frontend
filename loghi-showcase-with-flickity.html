@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pipocas - Loghi Showcase with Flickity</title>
+
+    <!-- Flickity -->
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css" />
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: monospace;
+        font-size: 2rem;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      html,
+      body,
+      .logo-carousel,
+      .logo-carousel__slide {
+        width: 100%;
+        height: 100%;
+      }
+
+      .logo-carousel__slide {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 5vw;
+      }
+      .logo-carousel__slide img {
+        width: 40%;
+      }
+
+      /* CONTROLS PANEL */
+      .controls {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 2vmin;
+        display: flex;
+        justify-content: center;
+      }
+      .controls > * + * {
+        margin-left: 10px;
+      }
+      button {
+        padding: 0.25em 0.5em;
+      }
+      /* CONTROLS PANEL -> BUTTON AVVICINA / ALLONTANA */
+      .zoom-on .logo-carousel img {
+        width: 100%;
+      }
+
+      /* =================================================== 
+            OVERRIDES
+      =================================================== */
+      .controls {
+        display: none;
+      }
+      .flickity-page-dots {
+        bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="controls">
+      <button class="btnZoom">Avvicina</button>
+      <button class="btnChangeBg">Cambia Sfondo</button>
+    </div>
+
+    <div class="logo-carousel">
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/logo_redesign_1.png" alt="" />
+        <figcaption>2_loghi_monofont_2°</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/logo_redesign_2.png" alt="" />
+        <figcaption>2_loghi_monofont_8°</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/logo_redesign_3.png" alt="" />
+        <figcaption>9</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/logo_redesign_4.png" alt="" />
+        <figcaption>10</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/logo_redesign_5.png" alt="" />
+        <figcaption>12</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/logo_redesign_6.png" alt="" />
+        <figcaption>13</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/14_logo_redesign_7.png" alt="" />
+        <figcaption>14_logo_redesign_7</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/15_logo_redesign_8.png" alt="" />
+        <figcaption>15_logo_redesign_8</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/14_logo_redesign_7_no_bordo.png" alt="" />
+        <figcaption>14_logo_redesign_7_no_bordo</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/15_logo_redesign_8_no_bordo.png" alt="" />
+        <figcaption>15_logo_redesign_8_no_bordo</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/pipocas_logo_crop_2.png" alt="" />
+        <figcaption>Originale Carole</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/pipocas_logo_crop_2_bw.png" alt="" />
+        <figcaption>Originale Carole B&W</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/pipocas_logo_crop_2_recolor.png" alt="" />
+        <figcaption>c-1</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/pipocas_logo_crop_2_recolor_2.png" alt="" />
+        <figcaption>c-2</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/pipocas_logo_crop_2_recolor_3.png" alt="" />
+        <figcaption>c-3</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/pipocas_logo_crop_2_recolor_4.png" alt="" />
+        <figcaption>c-4</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/pipocas_logo_crop_2_recolor_5.png" alt="" />
+        <figcaption>c-5</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/pipocas_logo_crop_2_recolor_6.png" alt="" />
+        <figcaption>c-6</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/pipocas_logo_crop_2_recolor_7.png" alt="" />
+        <figcaption>c-7</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/pipocas_logo_crop_2_recolor_8.png" alt="" />
+        <figcaption>c-8</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/pipocas_logo_crop_2_recolor_9.png" alt="" />
+        <figcaption>c-9</figcaption>
+      </figure>
+      <figure class="logo-carousel__slide">
+        <img src="./assets/images/logo/pipocas_logo_crop_2_recolor_10.png" alt="" />
+        <figcaption>c-10</figcaption>
+      </figure>
+    </div>
+
+    <script>
+      (function () {
+        var flkty = new Flickity(".logo-carousel", {
+          ...{
+            // define the selector of "cells" , otherwise every children of carousel are cosnidered cells
+            cellSelector: ".logo-carousel__slide",
+          },
+          ...{
+            wrapAround: false, //Default
+            wrapAround: true, // infinite scrolling ??
+          },
+          ...{
+            freeScroll: false, // disable snapping ??
+          },
+          ...{
+            autoPlay: true, // advance cells every 3 seconds
+            autoPlay: 1500, // advance cells ever {Number} milliseconds
+            autoPlay: false,
+            pauseAutoPlayOnHover: false, // auto play continues when user hovers over carousel ??
+          },
+          ...{
+            percentPosition: true, // cell width is in percentages ??
+          },
+          ...{
+            rightToLeft: false, // right to left ??
+          },
+          ...{
+            contain: true, //Contains cells to carousel element to prevent excess scroll at beginning or end. Has no effect if wrapAround: true.
+          },
+          ...{
+            //for these property cell cannot be wide 100% or you see no difference
+            cellAlign: "left",
+            cellAlign: "right",
+            cellAlign: "center", // default
+          },
+          ...{
+            resize: false, // disables window.on('resize') logic thst auto adjust dimensions
+            resize: true, // default
+          },
+          ...{
+            // Sets the height of the carousel to the height of the tallest cell. Enabled by default setGallerySize: true.
+            //Use setGallerySize: false if you prefer to size the carousel with CSS, rather than using the size of cells.
+            //
+            // in case you want a full-width and full-height carousel, remember to move "dots" inside the caroulse with CSS :
+            // .flickity-page-dots { bottom: 10px; }
+            //
+            setGallerySize: true, // deafult
+            setGallerySize: false,
+          },
+          ...{
+            accessibility: false,
+            accessibility: true, // default
+            // disables being able to tab to Flickity and keyboard navigation with Arrows
+          },
+        });
+
+        return;
+        document.querySelector(".btnZoom").addEventListener("click", function () {
+          const className = "zoom-on";
+          const isZoomed = document.body.classList.contains(className);
+          if (isZoomed) {
+            document.body.classList.remove(className);
+            this.innerHTML = "Avvicina";
+          } else {
+            document.body.classList.add(className);
+            this.innerHTML = "Allontana";
+          }
+        });
+
+        document.querySelector(".btnChangeBg").addEventListener("click", function () {
+          const className = "change-bg-on";
+          const isActive = document.body.classList.contains(className);
+          if (isActive) {
+            document.body.classList.remove(className);
+            this.innerHTML = "Cambia Sfondo";
+          } else {
+            document.body.classList.add(className);
+            this.innerHTML = "Torna al Bianco";
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

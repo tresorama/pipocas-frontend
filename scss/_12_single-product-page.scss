@@ -26,18 +26,22 @@
 
   &__name {
     margin-top: $space-y-lg;
-    @include text-heading-main;
+    //@include text-heading-main;
+    @include text-product-page-product-name;
   }
   &__brand {
-    margin-top: $space-y-0;
-    @include text-body;
+    margin-top: $space-y-xs;
+    //@include text-body;
+    @include text-product-page-product-brand;
+    opacity: 0.5;
   }
   &__price {
-    margin-top: $space-y-lg;
-    @include text-heading-main;
+    margin-top: $space-y-md;
+    //@include text-heading-main;
+    @include text-product-page-product-price;
   }
   &__description {
-    margin-top: $space-y-lg;
+    margin-top: $space-y-md;
     @include text-body;
 
     > * + * {

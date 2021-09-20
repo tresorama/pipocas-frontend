@@ -26,15 +26,18 @@
   }
   .product-details {
     flex-shrink: 0;
-    min-height: 60px;
+    min-height: 80px;
+    @media (min-width: 1200px) {
+      min-height: 5vw;
+    }
   }
 
   .product-name {
-    margin-top: $space-y-xs;
+    margin-top: $space-y-sm;
     @include text-product-grid-item-name;
   }
   .product-price {
-    margin-top: $space-y-0;
+    margin-top: $space-y-xxs;
     @include text-product-grid-item-price;
     opacity: 0.6;
   }
