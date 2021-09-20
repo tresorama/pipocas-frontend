@@ -1,20 +1,26 @@
 .breadcrumb {
-  padding-top: $space-y-sm;
-  padding-bottom: $space-y-sm;
-
+  padding: 1px;
   ul {
     list-style-type: none;
   }
   &__list {
+    margin-top: $space-y-sm;
+    margin-bottom: $space-y-sm;
     display: flex;
   }
   &__item {
-    :after {
-      content: "❭";
-      margin-left: $space-x-xs;
-    }
+    @include text-breadcrumb-item;
   }
   &__item + &__item {
+    :before {
+      content: "❭";
+      margin-right: $space-x-xs;
+      font-size: 0.6em;
+      vertical-align: middle;
+      display: inline-block;
+      text-decoration: none;
+    }
+
     margin-left: $space-x-xs;
   }
 }

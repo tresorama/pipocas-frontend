@@ -14,14 +14,18 @@
     @for $i from 1 through $exponent {
       $value: $value * $number;
     }
+  } @else if $exponent < 0 {
+    @for $i from 1 through -$exponent {
+      $value: $value / $number;
+    }
   }
 
   @return $value;
 }
 
-// $type-scale-ratio: 1.067; // minor second
+$type-scale-ratio: 1.067; // minor second
 // $type-scale-ratio: 1.125; // major second
-$type-scale-ratio: 1.2; // minor third
+// $type-scale-ratio: 1.2; // minor third
 // $type-scale-ratio: 1.25; // major third
 // $type-scale-ratio: 1.333; // perfext fourth
 // $type-scale-ratio: 1.414; // augmented fourth
@@ -107,32 +111,60 @@ $font-fam-display: "DIN Condensed";
   font-weight: 300;
   font-family: $font-fam-body;
 }
-
-@mixin text-header-navigation-item {
-  font-size: typeScale(4);
-  line-height: 1.2;
-  font-weight: 400;
+@mixin text-breadcrumb-item {
+  font-size: typeScale(0);
+  line-height: 1.125;
+  font-weight: 100;
+  //letter-spacing: -0.02em;
   font-family: $font-fam-body;
 }
-@mixin text-product-grid-item-name {
-  font-size: typeScale(0);
+@mixin text-page-heading-main {
+  font-size: typeScale(4);
+  line-height: 1.125;
+  font-weight: 400;
+  //letter-spacing: -0.02em;
+  font-family: $font-fam-body;
+}
+
+//header
+@mixin text-header-info-bar {
+  font-size: typeScale(-6);
   line-height: 1;
   font-weight: 400;
   font-family: $font-fam-body;
+  text-transform: uppercase;
+}
+@mixin text-header-navigation-item {
+  font-size: typeScale(3);
+  line-height: 1.2;
+  font-weight: 400;
+  font-family: $font-fam-body;
+  text-transform: uppercase;
+}
+// product grid
+@mixin text-product-grid-item-name {
+  font-size: typeScale(-5);
+  line-height: 1;
+  font-weight: 400;
+  font-family: $font-fam-body;
+  text-transform: uppercase;
 }
 @mixin text-product-grid-item-price {
-  font-size: typeScale(-1);
+  font-size: typeScale(-5);
   line-height: 1;
   font-weight: 400;
   letter-spacing: 0.01em;
   font-family: $font-fam-body;
+  text-transform: uppercase;
 }
+// single-product
 @mixin text-product-page-product-name {
   font-size: typeScale(4);
   line-height: 1.125;
   font-weight: 500;
   letter-spacing: -0.02em;
   font-family: $font-fam-body;
+  text-transform: uppercase;
 }
 @mixin text-product-page-product-brand {
   font-size: typeScale(0);
@@ -140,6 +172,7 @@ $font-fam-display: "DIN Condensed";
   font-weight: 400;
   letter-spacing: -0.02em;
   font-family: $font-fam-body;
+  text-transform: uppercase;
 }
 @mixin text-product-page-product-price {
   font-size: typeScale(2);
@@ -147,6 +180,7 @@ $font-fam-display: "DIN Condensed";
   font-weight: 400;
   letter-spacing: -0.02em;
   font-family: $font-fam-body;
+  text-transform: uppercase;
 }
 
 // body text
