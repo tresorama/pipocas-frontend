@@ -2,7 +2,11 @@
   .breadcrumb {
     &__list {
       justify-content: center;
+      margin-top: $space-y-xxl;
     }
+  }
+  .page-title {
+    padding-bottom: $space-y-xxl;
   }
 
   .filter-bar__panel {

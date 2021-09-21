@@ -10,3 +10,7 @@ body {
   background-color: $c-surface;
   opacity: 0.5;
 }
+
+.breadcrumb {
+  padding: 1px; // prevent margin-collapsing
+}

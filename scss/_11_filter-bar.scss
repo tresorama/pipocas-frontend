@@ -16,7 +16,10 @@
     padding-bottom: $space-y-md;
     padding-left: $space-x-sm;
     padding-right: $space-x-sm;
-    min-width: 70px;
+    min-width: 20vw;
+    @media (min-width: 768px) {
+      min-width: 30ch;
+    }
   }
   &__item + &__item {
     margin-left: $space-x-sm;
@@ -25,9 +28,6 @@
     margin-left: auto;
     .filter-bar__item-title {
       text-align: right;
-    }
-    .filter-bar__panel {
-      right: 0;
     }
   }
 
@@ -71,6 +71,11 @@
       top: 100%;
       left: 0;
       min-width: 15vw;
+    }
+
+    &__item:last-child .filter-bar__panel {
+      right: 0;
+      left: initial;
     }
   }
 }

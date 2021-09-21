@@ -33,12 +33,12 @@
   }
 
   .product-name {
-    margin-top: $space-y-lg;
+    margin-top: $space-y-md;
     @include text-product-grid-item-name;
     text-align: center;
   }
   .product-price {
-    margin-top: $space-y-xxs;
+    margin-top: $space-y-xs;
     @include text-product-grid-item-price;
     text-align: center;
     opacity: 0.6;
