@@ -1,0 +1,7 @@
+.page-title {
+  padding-top: $space-y-xxl;
+  padding-bottom: $space-y-xxl;
+
+  @include text-page-heading-main;
+  text-align: center;
+}

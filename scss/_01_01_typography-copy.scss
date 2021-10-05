@@ -1,0 +1,231 @@
+/* =================================================== 
+      FUNCTIONS
+=================================================== */
+// @use "sass:math";
+
+// @function power($number, $exponent) {
+//   @return math.pow($number, $exponent);
+// }
+
+@function power($number, $exponent) {
+  $value: 1;
+
+  @if $exponent > 0 {
+    @for $i from 1 through $exponent {
+      $value: $value * $number;
+    }
+  } @else if $exponent < 0 {
+    @for $i from 1 through -$exponent {
+      $value: $value / $number;
+    }
+  }
+
+  @return $value;
+}
+
+$type-scale-ratio: 1.067; // minor second
+// $type-scale-ratio: 1.125; // major second
+// $type-scale-ratio: 1.2; // minor third
+// $type-scale-ratio: 1.25; // major third
+// $type-scale-ratio: 1.333; // perfext fourth
+// $type-scale-ratio: 1.414; // augmented fourth
+// $type-scale-ratio: 1.5; // perfect fifth
+// $type-scale-ratio: 1.618; // golden ratio
+
+@function typeScale($index) {
+  $size: power($type-scale-ratio, $index);
+  @return #{$size}rem;
+}
+
+/* =================================================== 
+      FONT FAMILIES SETUP
+=================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+$font-fam-body: "Montserrat";
+$font-fam-display: "Poppins";
+
+$font-fam-body: "Avenir";
+$font-fam-display: "DIN Condensed";
+
+// sets
+@mixin _text-base {
+  font-size: typeScale(0);
+  line-height: 1.29;
+  font-weight: 300;
+  font-family: $font-fam-body;
+}
+@mixin _text-heading {
+}
+@mixin _text-heading-second {
+}
+@mixin _text-md {
+}
+@mixin _text-md {
+}
+@mixin _text-md {
+}
+@mixin _text-md {
+}
+
+/* =================================================== 
+      Without Context
+=================================================== */
+@mixin text-body {
+  // font-size: typeScale(0);
+  // line-height: 1.29;
+  // font-weight: 300;
+  // font-family: $font-fam-body;
+  @include _text-base;
+}
+@mixin text-button {
+  // font-size: typeScale(0);
+  // line-height: 1.29;
+  // font-weight: 400;
+  // font-family: $font-fam-body;
+  @include _text-base;
+  font-weight: 400;
+}
+@mixin text-button-light {
+  // font-size: typeScale(0);
+  // line-height: 1.29;
+  // font-weight: 300;
+  // font-family: $font-fam-body;
+  @include _text-base;
+}
+@mixin text-breadcrumb-item {
+  font-size: typeScale(-2);
+  line-height: 1.125;
+  font-weight: 100;
+  //letter-spacing: -0.02em;
+  font-family: $font-fam-body;
+}
+@mixin text-page-heading-main {
+  font-size: typeScale(4);
+  line-height: 1.125;
+  font-weight: 400;
+  //letter-spacing: -0.02em;
+  font-family: $font-fam-body;
+}
+
+//header
+@mixin text-header-info-bar {
+  font-size: typeScale(-6);
+  line-height: 1;
+  font-weight: 400;
+  font-family: $font-fam-body;
+  text-transform: uppercase;
+}
+@mixin text-header-navigation-item {
+  font-size: typeScale(3);
+  line-height: 1.2;
+  font-weight: 400;
+  font-family: $font-fam-body;
+  text-transform: uppercase;
+}
+// home page -> hero
+@mixin text-hero-heading {
+  font-size: typeScale(4);
+  line-height: 1.125;
+  font-weight: 100;
+  //letter-spacing: -0.02em;
+  font-family: $font-fam-body;
+}
+// home page -> useful info
+@mixin text-useful-info-heading {
+  font-size: typeScale(4);
+  line-height: 1.125;
+  font-weight: 300;
+  //letter-spacing: -0.02em;
+  font-family: $font-fam-body;
+}
+@mixin text-useful-info-body {
+  font-size: typeScale(0);
+  line-height: 1.29;
+  font-weight: 300;
+  font-family: $font-fam-body;
+}
+// info page
+@mixin text-info-page-heading {
+  font-size: typeScale(4);
+  line-height: 1.125;
+  font-weight: 300;
+  //letter-spacing: -0.02em;
+  font-family: $font-fam-body;
+}
+@mixin text-info-page-item-title {
+  font-size: typeScale(0);
+  line-height: 1.125;
+  font-weight: 300;
+  //letter-spacing: -0.02em;
+  font-family: $font-fam-body;
+}
+// info detailed page
+@mixin text-info-detailed-heading {
+  font-size: typeScale(4);
+  line-height: 1.125;
+  font-weight: 600;
+  //letter-spacing: -0.02em;
+  font-family: $font-fam-body;
+  text-transform: uppercase;
+}
+@mixin text-info-detailed-section-heading {
+  font-size: typeScale(2);
+  line-height: 1.29;
+  font-weight: 500;
+  //letter-spacing: -0.02em;
+  font-family: $font-fam-body;
+}
+@mixin text-info-detailed-body {
+  font-size: typeScale(0);
+  line-height: 1.29;
+  font-weight: 100;
+  font-family: $font-fam-body;
+}
+// product grid
+@mixin text-product-grid-item-name {
+  font-size: typeScale(-5);
+  line-height: 1;
+  font-weight: 400;
+  font-family: $font-fam-body;
+  text-transform: uppercase;
+}
+@mixin text-product-grid-item-price {
+  font-size: typeScale(-5);
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  font-family: $font-fam-body;
+  text-transform: uppercase;
+}
+// single-product
+@mixin text-product-page-product-name {
+  font-size: typeScale(4);
+  line-height: 1.125;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  font-family: $font-fam-body;
+  text-transform: uppercase;
+}
+@mixin text-product-page-product-brand {
+  font-size: typeScale(0);
+  line-height: 1.125;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  font-family: $font-fam-body;
+  text-transform: uppercase;
+}
+@mixin text-product-page-product-price {
+  font-size: typeScale(2);
+  line-height: 1.125;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  font-family: $font-fam-body;
+  text-transform: uppercase;
+}
+
+// body text
+body {
+  @include text-body;
+}

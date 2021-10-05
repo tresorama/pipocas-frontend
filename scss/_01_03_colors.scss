@@ -9,3 +9,20 @@ $c-brand-2: hsl(5, 74%, 49%); // #d93020
 
 $c-bg: $c-white;
 $c-surface: $c-grey-light;
+
+$c-hero-details-bg: hsla(0, 0%, 0%, 0.55);
+
+//buttons
+$c-btn-outline-black-bg: transparent;
+$c-btn-outline-black-text: hsl(0, 0%, 0%);
+$c-btn-outline-black-border: hsl(0, 0%, 60%);
+$c-btn-outline-black-active-bg: hsla(0, 0%, 73%, 0.35);
+$c-btn-outline-black-active-text: hsl(0, 0%, 0%);
+$c-btn-outline-black-active-border: hsl(0, 0%, 60%);
+
+$c-btn-outline-white-bg: transparent;
+$c-btn-outline-white-text: hsl(0, 0%, 100%);
+$c-btn-outline-white-border: hsl(0, 0%, 60%);
+$c-btn-outline-white-active-bg: hsla(0, 0%, 0%, 0.35);
+$c-btn-outline-white-active-text: hsl(0, 0%, 100%);
+$c-btn-outline-white-active-border: hsl(0, 0%, 60%);

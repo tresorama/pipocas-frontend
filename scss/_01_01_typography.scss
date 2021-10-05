@@ -49,141 +49,142 @@ $font-fam-display: "Poppins";
 $font-fam-body: "Avenir";
 $font-fam-display: "DIN Condensed";
 
-/* =================================================== 
-      REFERENCES
-=================================================== */
-@mixin _text-heading-main {
-  font-size: 2.82rem;
-  line-height: 1.125;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  font-family: $font-fam-display;
-}
-@mixin _text-heading-support {
-  font-size: 1rem;
-  line-height: 1.1765;
-  font-weight: 600;
-  font-family: $font-fam-body;
-}
-@mixin _text-heading-section {
-  font-size: 2.12rem;
-  line-height: 1.2;
-  font-weight: 600;
-  font-family: $font-fam-display;
-}
-@mixin _text-label {
-  font-size: 1rem;
-  line-height: 1.29;
-  font-weight: 500;
-  font-family: $font-fam-body;
-}
-@mixin _text-button {
-  font-size: 1rem;
-  line-height: 1.29;
-  font-weight: 400;
-  font-family: $font-fam-body;
-}
-@mixin _text-button-light {
-  font-size: 1rem;
-  line-height: 1.29;
-  font-weight: 300;
-  font-family: $font-fam-body;
-}
-
-/* =================================================== 
-      REAL CONTEXTUAL STYLES
-=================================================== */
-@mixin text-body {
-  font-size: typeScale(0);
-  line-height: 1.29;
-  font-weight: 300;
-  font-family: $font-fam-body;
-}
-@mixin text-button {
-  font-size: typeScale(0);
-  line-height: 1.29;
-  font-weight: 400;
-  font-family: $font-fam-body;
-}
-@mixin text-button-light {
-  font-size: typeScale(0);
-  line-height: 1.29;
-  font-weight: 300;
-  font-family: $font-fam-body;
-}
-@mixin text-breadcrumb-item {
-  font-size: typeScale(-2);
-  line-height: 1.125;
-  font-weight: 100;
-  //letter-spacing: -0.02em;
-  font-family: $font-fam-body;
-}
-@mixin text-page-heading-main {
+// sets
+@mixin _text-heading {
   font-size: typeScale(4);
   line-height: 1.125;
   font-weight: 400;
-  //letter-spacing: -0.02em;
-  font-family: $font-fam-body;
-}
-
-//header
-@mixin text-header-info-bar {
-  font-size: typeScale(-6);
-  line-height: 1;
-  font-weight: 400;
+  letter-spacing: 0.05em;
   font-family: $font-fam-body;
   text-transform: uppercase;
 }
-@mixin text-header-navigation-item {
+@mixin _text-heading-second {
   font-size: typeScale(3);
   line-height: 1.2;
   font-weight: 400;
+  letter-spacing: 0.05em;
   font-family: $font-fam-body;
   text-transform: uppercase;
 }
-// product grid
-@mixin text-product-grid-item-name {
+@mixin _text-base {
+  font-size: typeScale(0);
+  line-height: 1.29;
+  font-weight: 100;
+  letter-spacing: 0.05em;
+  font-family: $font-fam-body;
+}
+@mixin _text-small {
+  font-size: typeScale(-2);
+  line-height: 1.125;
+  font-weight: 100;
+  letter-spacing: 0.05em;
+  font-family: $font-fam-body;
+}
+@mixin _text-smaller {
   font-size: typeScale(-5);
   line-height: 1;
-  font-weight: 400;
+  font-weight: 100;
+  letter-spacing: 0.05em;
   font-family: $font-fam-body;
+}
+/* =================================================== 
+      Body
+=================================================== */
+@mixin text-body {
+  @include _text-base;
+}
+/* =================================================== 
+      Button
+=================================================== */
+@mixin text-button {
+  @include _text-small;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+@mixin text-button-light {
+  @include _text-small;
+  text-transform: uppercase;
+}
+/* =================================================== 
+      Breadcrumb
+=================================================== */
+@mixin text-breadcrumb-item {
+  @include _text-small;
+  text-transform: uppercase;
+}
+/* =================================================== 
+      Page Title
+=================================================== */
+@mixin text-page-heading-main {
+  @include _text-heading;
+}
+
+/* =================================================== 
+      Page Header
+=================================================== */
+@mixin text-header-info-bar {
+  @include _text-smaller;
+  text-transform: uppercase;
+}
+@mixin text-header-navigation-item {
+  @include _text-heading-second;
+}
+/* =================================================== 
+      Home Page => Hero
+=================================================== */
+@mixin text-hero-heading {
+  @include _text-heading;
+}
+/* =================================================== 
+      Home Page => Info Block
+=================================================== */
+@mixin text-useful-info-heading {
+  @include _text-heading;
+}
+@mixin text-useful-info-body {
+  @include _text-base;
+}
+/* =================================================== 
+      Info Page
+=================================================== */
+@mixin text-info-page-item-title {
+  @include _text-base;
+  text-transform: uppercase;
+}
+/* =================================================== 
+      Info Detailed Page
+=================================================== */
+@mixin text-info-detailed-heading {
+  @include _text-heading;
+}
+@mixin text-info-detailed-section-heading {
+  @include _text-heading;
+}
+@mixin text-info-detailed-body {
+  @include _text-base;
+}
+
+/* =================================================== 
+      Product Grid
+=================================================== */
+@mixin text-product-grid-item-name {
+  @include _text-smaller;
   text-transform: uppercase;
 }
 @mixin text-product-grid-item-price {
-  font-size: typeScale(-5);
-  line-height: 1;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  font-family: $font-fam-body;
+  @include _text-smaller;
   text-transform: uppercase;
 }
-// single-product
+/* =================================================== 
+      Single Product Page
+=================================================== */
 @mixin text-product-page-product-name {
-  font-size: typeScale(4);
-  line-height: 1.125;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  font-family: $font-fam-body;
-  text-transform: uppercase;
+  @include _text-heading;
 }
 @mixin text-product-page-product-brand {
-  font-size: typeScale(0);
-  line-height: 1.125;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  font-family: $font-fam-body;
+  @include _text-base;
   text-transform: uppercase;
 }
 @mixin text-product-page-product-price {
-  font-size: typeScale(2);
-  line-height: 1.125;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  font-family: $font-fam-body;
-  text-transform: uppercase;
-}
-
-// body text
-body {
-  @include text-body;
+  @include _text-heading-second;
 }

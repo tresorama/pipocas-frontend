@@ -1,0 +1,40 @@
+.INFO-DETAILED-PAGE {
+  background-color: $c-grey-light;
+
+  .page-title {
+    // @include text-info-detailed-heading;
+  }
+}
+.info-detailed {
+  @include text-info-detailed-body;
+  padding-top: 1px;
+  padding-bottom: $space-y-lg;
+  // border: 1px solid;
+
+  h2 {
+    @include text-info-detailed-section-heading;
+    margin-top: $space-y-md;
+    margin-bottom: $space-y-lg;
+    // background-color: $c-white;
+  }
+
+  p {
+    margin-top: $space-y-md;
+  }
+
+  b {
+    font-weight: 500;
+  }
+
+  img {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  ul {
+    display: block;
+    margin-top: $space-y-sm;
+    padding-left: $space-x-sm;
+    list-style-type: none;
+  }
+}

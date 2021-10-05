@@ -1,8 +1,8 @@
 import { throttle, ObserverScroll, mediaQueryWatcher, fakeUseRef, fakeUseState, forceReflow } from "./frontend-utilities.js";
-import runDevoperTimeSaver from "./devTimeSaver.js";
+import runDeveloperTimeSaver from "./devTimeSaver.js";
 // import ViewportDetailsBanner from "./ViewportDetailsBanner.js";
 //ViewportDetailsBanner();
-runDevoperTimeSaver();
+runDeveloperTimeSaver();
 
 /* =================================================== 
   Initialize Global Object That Contains all UI animation
@@ -15,7 +15,7 @@ window._UI = {};
 (function (iMustRun) {
   if (!iMustRun) return;
 
-  // UI ANIMATION -> Header Navigation
+  // UI ANIMATION -> Header Navigation Show/Hide
   (function () {
     const openTimeline = gsap
       .timeline({ paused: true, defaults: { duration: 0.3, ease: "ease" } })
@@ -47,20 +47,19 @@ window._UI = {};
     const headerSelector = ".page-header";
     const headerBarSelector = ".page-header__bar";
     const taxonomyNavigationSelector = ".taxonomy-navigation";
+    const duration = 0.4; // time to show/hide header bar in seconds
+
     window._UI.headerBar = {
       isVisible: true,
       show() {
         if (this.isVisible) return;
         this.isVisible = true;
-        gsap.to(headerSelector, { top: 0, duration: 0.1 });
+        gsap.to(headerSelector, { top: 0, duration });
       },
       hide() {
         if (!this.isVisible) return;
         this.isVisible = false;
-        gsap.to(headerSelector, {
-          top: -this.getHeight(),
-          duration: 0.1,
-        });
+        gsap.to(headerSelector, { top: -this.getHeight(), duration });
       },
       getHeight() {
         const headerBarHeight = document.querySelector(headerBarSelector).getBoundingClientRect().height || 0;
@@ -74,12 +73,12 @@ window._UI = {};
     };
   })();
 
-  // EVENT LISTENER -> hamburger
+  // EVENT LISTENER -> hamburger click
   document.querySelector("[data-js=header-navigation-mobile-trigger]").addEventListener("click", function () {
     window._UI.headerNavigation.toggle();
   });
 
-  // EVENT LISTENER -> header-navigation auto show/hide
+  // EVENT LISTENER -> Header Bar Hide while scrolling Down + Show while scrolling Up.
   new ObserverScroll({
     onAfter: [
       ({ scrollDirection, scrollPos, bodyBoundingClientRect }) => {
@@ -140,8 +139,8 @@ window._UI = {};
       const height = getHeight();
       document.documentElement.style.setProperty(cssCustomPropName, `${height}px`);
     };
-    setHeightCustomProperty();
     window.addEventListener("resize", throttle(setHeightCustomProperty, 200));
+    setHeightCustomProperty();
   })();
 })(true);
 

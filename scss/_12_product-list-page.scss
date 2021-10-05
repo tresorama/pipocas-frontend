@@ -1,12 +1,15 @@
 .PRODUCT-LIST-PAGE {
   .breadcrumb {
+    background-color: $c-surface;
+
     &__list {
       justify-content: center;
       margin-top: $space-y-xxl;
     }
   }
   .page-title {
-    padding-bottom: $space-y-xxl;
+    // padding-top: $space-y-lg;
+    background-color: $c-surface;
   }
 
   .filter-bar__panel {

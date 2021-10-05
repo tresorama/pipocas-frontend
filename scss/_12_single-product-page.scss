@@ -25,24 +25,26 @@
   }
 
   &__name {
-    margin-top: $space-y-lg;
-    //@include text-heading-main;
+    text-align: center;
+    margin-top: $space-y-3xl;
     @include text-product-page-product-name;
   }
   &__brand {
-    margin-top: $space-y-xs;
-    //@include text-body;
+    text-align: center;
+    margin-top: $space-y-lg;
     @include text-product-page-product-brand;
     opacity: 0.5;
   }
   &__price {
-    margin-top: $space-y-md;
-    //@include text-heading-main;
+    text-align: center;
+    margin-top: $space-y-lg;
     @include text-product-page-product-price;
   }
   &__description {
-    margin-top: $space-y-md;
-    @include text-body;
+    margin-top: $space-y-xl;
+    max-width: 40ch;
+    margin-left: auto;
+    margin-right: auto;
 
     > * + * {
       margin-top: $space-y-sm;
@@ -52,7 +54,7 @@
     }
   }
   &__add-to-cart {
-    margin-top: $space-y-lg;
+    margin-top: $space-y-xxl;
   }
   &__add-to-wishlist {
     margin-top: $space-y-sm;
@@ -106,4 +108,11 @@
       margin-top: var(--live-all-header-stuffs-height, var(--header-bar-height));
     }
   }
+}
+
+/* =================================================== 
+      Cross Sell Products
+=================================================== */
+.cross-sell-products {
+  margin-top: $space-y-4xl;
 }

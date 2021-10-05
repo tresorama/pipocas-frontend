@@ -7,8 +7,8 @@
 @import "./01_04_variables";
 
 // architecture system
-@import "./02_01_common_classes";
-@import "./02_02_common_mixins";
+@import "./02_01_common-classes";
+@import "./02_02_common-mixins";
 
 // atoms
 @import "./03_01_button";
@@ -16,21 +16,26 @@
 // organism
 // external components
 @import "./09_01_carousel";
-@import "./09_02_nav_slider";
+@import "./09_02_nav-slider";
 
 // every page shared global syles
-@import "./10_global_styles";
+@import "./10_global-styles";
 @import "./11_page-header";
-@import "./11_page_breadcrumb";
-@import "./11_page_title";
+@import "./11_breadcrumb";
+@import "./11_page-title";
 @import "./11_filter-bar";
 @import "./11_product-grid";
+@import "./11_hero";
+@import "./11_useful-info";
 
 // single pages implementation
-@import "./12_all_pages";
+@import "./12_all-pages";
+@import "./12_home-page";
 @import "./12_single-product-page";
 @import "./12_product-list-page";
 @import "./12_product-list-page__filter-bar-panel-with-css-transition";
+@import "./12_info-page";
+@import "./12_info-detailed-page";
 
 .no-fa i.fa,
 .no-fa i.fas,
@@ -38,9 +43,12 @@
   display: none;
 }
 
-.no-ph-reg i[class^="ph-"]:not([class*="light"]) {
+.no-ph-reg i[class^="ph-"]:not([class*="thin"]):not([class*="light"]) {
   display: none;
 }
-.no-ph-light i[class^="ph-"][class*="light"] {
+.no-ph-light i[class^="ph-"][class*="-light"] {
+  display: none;
+}
+.no-ph-thin i[class^="ph-"][class*="-thin"] {
   display: none;
 }

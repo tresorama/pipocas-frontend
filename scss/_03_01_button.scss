@@ -6,7 +6,7 @@
   display: inline-block;
   text-align: center;
   cursor: pointer;
-  padding: 0.55em 1.2em;
+  padding: 0.9em 1.2em;
   border: 2px solid;
   border-radius: $border-radius;
   background-color: var(--color-bg);
@@ -20,19 +20,31 @@
     border-color: var(--color-border-active);
   }
 
-  --color-text: #{$c-black};
-  --color-bg: transparent;
-  --color-border: #{$c-black};
-  --color-text-active: #{$c-black};
-  --color-bg-active: #{$c-grey-light};
-  --color-border-active: #{$c-black};
+  --color-text: #{$c-btn-outline-black-text};
+  --color-bg: #{$c-btn-outline-black-bg};
+  --color-border: #{$c-btn-outline-black-border};
+  --color-text-active: #{$c-btn-outline-black-active-text};
+  --color-bg-active: #{$c-btn-outline-black-active-bg};
+  --color-border-active: #{$c-btn-outline-black-active-border};
+}
+
+a.btn {
+  text-decoration: none;
 }
 
 /* =================================================== 
       BUTTON - SHAPE VARIANTS
 =================================================== */
 .btn--s-outline {
-  //is default
+  //is default, so it inherits the .btn tokens ...
+  &.btn--c-primary {
+    --color-text: #{$c-btn-outline-white-text};
+    --color-bg: #{$c-btn-outline-white-bg};
+    --color-border: #{$c-btn-outline-white-border};
+    --color-text-active: #{$c-btn-outline-white-active-text};
+    --color-bg-active: #{$c-btn-outline-white-active-bg};
+    --color-border-active: #{$c-btn-outline-white-active-border};
+  }
 }
 .btn--s-contained {
   --color-text: #{$c-black};

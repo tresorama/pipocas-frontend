@@ -19,7 +19,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./scss/style.scss" />
   </head>
-  <body class="SINGLE-PRODUCT-PAGE no-fa no-ph-light">
+  <body class="SINGLE-PRODUCT-PAGE no-fa no-ph-reg no-ph-light">
     <!-- 
       HEADER WITH NAVIGATION
     -->
@@ -57,12 +57,15 @@
                   <i class="fas fa-bars"></i>
                   <i class="ph-list"></i>
                   <i class="ph-list-light"></i>
+                  <i class="ph-list-thin"></i>
                 </button>
               </li>
               <li class="header-secondary-navigation__item search-box-trigger">
                 <button class="header-icon btn-icon" data-js="search-box-trigger">
                   <i class="fa fa-search"></i>
-                  <i class="ph-magnifying-glass"></i><i class="ph-magnifying-glass-light"></i>
+                  <i class="ph-magnifying-glass"></i>
+                  <i class="ph-magnifying-glass-light"></i>
+                  <i class="ph-magnifying-glass-thin"></i>
                 </button>
               </li>
             </ul>
@@ -75,7 +78,9 @@
               <li class="header-secondary-navigation__item search-box-trigger">
                 <button class="header-icon btn-icon" data-js="search-box-trigger">
                   <i class="fa fa-search"></i>
-                  <i class="ph-magnifying-glass"></i><i class="ph-magnifying-glass-light"></i>
+                  <i class="ph-magnifying-glass"></i>
+                  <i class="ph-magnifying-glass-light"></i>
+                  <i class="ph-magnifying-glass-thin"></i>
                 </button>
               </li>
               <li class="header-secondary-navigation__item my-account-trigger">
@@ -83,6 +88,7 @@
                   <i class="fa fa-user"></i>
                   <i class="ph-user"></i>
                   <i class="ph-user-light"></i>
+                  <i class="ph-user-thin"></i>
                 </button>
               </li>
               <li class="header-secondary-navigation__item wishlist-trigger">
@@ -90,6 +96,7 @@
                   <i class="far fa-heart"></i>
                   <i class="ph-heart"></i>
                   <i class="ph-heart-light"></i>
+                  <i class="ph-heart-thin"></i>
                 </button>
               </li>
               <li class="header-secondary-navigation__item cart-trigger">
@@ -97,6 +104,7 @@
                   <i class="fas fa-shopping-cart"></i>
                   <i class="ph-shopping-bag"></i>
                   <i class="ph-shopping-bag-light"></i>
+                  <i class="ph-shopping-bag-thin"></i>
                 </button>
               </li>
             </ul>
@@ -210,11 +218,27 @@
     </div>
 
     <!-- CROSS-SELL PRODUCT MINI GRID -->
-    <div class="cross-sell-products" style="height: 300px"></div>
-    <!--
+    <div class="cross-sell-products">
+      <div class="page-title">
+        <span>Potrebbero piacerti</span>
+      </div>
+      <div class="product-grid grid-pattern-1">
+        <div class="container-fw">
+          <div class="product-grid__list">
+            <div class="product-grid__item">
+              <div class="product-image">
+                <img src="/assets/images/products/1/1.jpg" />
+                <img src="/assets/images/products/1/2.jpg" />
+              </div>
+              <div class="product-details">
+                <div class="product-name">Pantalone Scuro</div>
+                <div class="product-price">€50</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
--->
 
     <!--
       SCRIPTS

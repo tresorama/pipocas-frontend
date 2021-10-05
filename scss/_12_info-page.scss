@@ -1,0 +1,21 @@
+.INFO-PAGE {
+  background-color: $c-grey-light;
+  .page-title {
+    // @include text-info-page-heading;
+  }
+}
+
+.infos-page-list {
+}
+.infos-page-item {
+  @include text-info-page-item-title;
+  display: block;
+  text-align: center;
+  background-color: $c-white;
+  padding-top: $space-y-lg;
+  padding-bottom: $space-y-lg;
+
+  & + & {
+    margin-top: $space-y-md;
+  }
+}

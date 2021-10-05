@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel ./index.html --open",
+    "start:homepage": "parcel ./homepage.html --open",
     "start:single-product": "parcel ./single-product.html --open",
     "start:product-list": "parcel ./product-list.html --open",
     "build:clean": "rm -r ./dist",
