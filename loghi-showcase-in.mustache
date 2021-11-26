@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pipocas - Loghi Showcase</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: monospace;
+        font-size: 2rem;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      html,
+      body,
+      .scroll-snap-parent,
+      .scroll-snap-item {
+        width: 100%;
+        height: 100%;
+      }
+
+      .scroll-snap-parent {
+        scroll-snap-type: y mandatory;
+        overflow-y: scroll;
+      }
+      .scroll-snap-item {
+        scroll-snap-align: start;
+      }
+
+      .scroll-snap--horizontal.scroll-snap-parent {
+        scroll-snap-type: x mandatory;
+        display: flex;
+      }
+      .scroll-snap--horizontal .scroll-snap-item {
+        flex-shrink: 0;
+      }
+
+      .logo-carousel figure {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 5vw;
+      }
+      .logo-carousel img {
+        width: 40%;
+      }
+
+      /* CHANGE BACKGROUND ON TIME */
+      body {
+        --time: 4s;
+        --items-count: 3;
+      }
+      .change-bg-on {
+        animation: changeBgColor calc(var(--time) * var(--items-count)) infinite steps(1);
+      }
+      @keyframes changeBgColor {
+        0% {
+          background: url("./assets/images/utilities/1032px-Brown_paper_bag_texture.jpg");
+          background-size: cover;
+          background-repeat: no-repeat;
+          color: black;
+        }
+        33% {
+          background: black;
+          color: white;
+        }
+        66% {
+          background: white;
+          color: black;
+        }
+      }
+
+      /* CONTROLS PANEL */
+      .controls {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 2vmin;
+        display: flex;
+        justify-content: center;
+      }
+      .controls > * + * {
+        margin-left: 10px;
+      }
+      button {
+        padding: 0.25em 0.5em;
+      }
+      /* CONTROLS PANEL -> BUTTON AVVICINA / ALLONTANA */
+      .zoom-on .logo-carousel img {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="controls">
+      <button class="btnZoom">Avvicina</button>
+      <button class="btnChangeBg">Cambia Sfondo</button>
+    </div>
+
+    <div class="logo-carousel scroll-snap-parent scroll-snap--horizontal">
+    {{#loghi}}
+      <figure id="{{id}}" class="scroll-snap-item">
+        <img src="{{src}}" alt="" />
+        <figcaption>{{caption}}</figcaption>
+      </figure>
+    {{/loghi}}
+    </div>
+
+    <script>
+      document.querySelector(".btnZoom").addEventListener("click", function () {
+        const className = "zoom-on";
+        const isZoomed = document.body.classList.contains(className);
+        if (isZoomed) {
+          document.body.classList.remove(className);
+          this.innerHTML = "Avvicina";
+        } else {
+          document.body.classList.add(className);
+          this.innerHTML = "Allontana";
+        }
+      });
+      document.querySelector(".btnChangeBg").addEventListener("click", function () {
+        const className = "change-bg-on";
+        const isActive = document.body.classList.contains(className);
+        if (isActive) {
+          document.body.classList.remove(className);
+          this.innerHTML = "Cambia Sfondo";
+        } else {
+          document.body.classList.add(className);
+          this.innerHTML = "Torna al Bianco";
+        }
+      });
+    </script>
+  </body>
+</html>

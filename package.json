@@ -12,7 +12,8 @@
     "build": "npm run build:clean ; parcel build ./index.html",
     "build:gh-pages": "npm run build:clean ; parcel build ./index.html --public-url \"https://tresorama.github.io/pipocas-frontend/\"",
     "predeploy": "npm run build:gh-pages",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "mustache-loghi": "mustache loghi-showcase-generator-list.json loghi-showcase-in.mustache > loghi-showcase.html"
   },
   "devDependencies": {
     "gh-pages": "^3.2.3",
@@ -30,5 +31,8 @@
         "staticOutDir": "assets/"
       }
     ]
+  },
+  "dependencies": {
+    "mustache": "^4.2.0"
   }
 }
