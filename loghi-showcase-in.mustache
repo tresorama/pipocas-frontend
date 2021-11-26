@@ -102,12 +102,17 @@
       .zoom-on .logo-carousel img {
         width: 100%;
       }
+
+      .hide-caption figure figcaption {
+        opacity: 0;
+      }
     </style>
   </head>
-  <body>
+  <body class="hide-caption">
     <div class="controls">
       <button class="btnZoom">Avvicina</button>
       <button class="btnChangeBg">Cambia Sfondo</button>
+      <button class="btnShowCaption">Mostra Nome</button>
     </div>
 
     <div class="logo-carousel scroll-snap-parent scroll-snap--horizontal">
@@ -131,6 +136,7 @@
           this.innerHTML = "Allontana";
         }
       });
+
       document.querySelector(".btnChangeBg").addEventListener("click", function () {
         const className = "change-bg-on";
         const isActive = document.body.classList.contains(className);
@@ -140,6 +146,18 @@
         } else {
           document.body.classList.add(className);
           this.innerHTML = "Torna al Bianco";
+        }
+      });
+
+      document.querySelector(".btnShowCaption").addEventListener("click", function () {
+        const className = "hide-caption";
+        const isActive = document.body.classList.contains(className);
+        if (isActive) {
+          document.body.classList.remove(className);
+          this.innerHTML = "Mostra Nome";
+        } else {
+          document.body.classList.add(className);
+          this.innerHTML = "Nascondi nome";
         }
       });
     </script>
